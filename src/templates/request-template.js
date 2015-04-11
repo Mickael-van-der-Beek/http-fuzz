@@ -264,16 +264,93 @@ module.exports = (function () {
 			]
 		},
 
-		message_body: null,
+		field_name: {
+			token: 'token'
+		},
 
-		method: null,
-		http_version: null,
+		field_value: {
+			$or: [
+				{
+					token: 'field_content'
+				},
+				{
+					token: 'LWS'
+				}
+			],
+			quantifier: '*'
+		},
+
+		method: {
+			// Missing WebDAV methods as well as DEBUG and TRACK
+			$or: [
+				{
+					literal: 'OPTIONS'
+				},
+				{
+					literal: 'GET'
+				},
+				{
+					literal: 'HEAD'
+				},
+				{
+					literal: 'POST'
+				},
+				{
+					literal: 'PUT'
+				},
+				{
+					literal: 'DELETE'
+				},
+				{
+					literal: 'TRACE'
+				},
+				{
+					literal: 'CONNECT'
+				},
+				{
+					token: 'extension_method'
+				}
+			]
+		},
+
+		extension_method: {
+			token: 'token'
+		},
+
+		http_version: {
+			$and: [
+				{
+					literal: 'HTTP'
+				},
+				{
+					literal: '/'
+				},
+				{
+					token: 'DIGIT',
+					quantifier: '+'
+				},
+				{
+					literal: '.'
+				},
+				{
+					token: 'DIGIT',
+					quantifier: '+'
+				}
+			]
+		},
+
+		field_content: null,
+		message_body: null,
 
 		absolute_uri: null,
 		abs_path: null,
 		authority: null,
 
-		field_name: null,
-		field_value: null
+		token: {
+			// any CHAR except CTLs or separators
+			token: 'CHAR',
+			quantifier: '+'
+		}
+
 	};
 });
