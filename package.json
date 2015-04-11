@@ -1,0 +1,19 @@
+{
+	"name": "http-fuzz",
+	"private": true,
+	"version": "0.0.1",
+	"description": "HTTP request fuzzing.",
+	"main": "src/index.js",
+	"scripts": {
+		"start": "node src/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Mickael-van-der-Beek/http-fuzz"
+	},
+	"author": "Mickael van der Beek (https://github.com/Mickael-van-der-Beek)",
+	"bugs": {
+		"url": "https://github.com/Mickael-van-der-Beek/http-fuzz/issues"
+	},
+	"homepage": "https://github.com/Mickael-van-der-Beek/http-fuzz"
+}
