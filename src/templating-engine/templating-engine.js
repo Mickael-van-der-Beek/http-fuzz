@@ -31,30 +31,59 @@ module.exports = (function () {
 
 		var mainToken = template[mainKey];
 
-		var literal = null;
-
-		if ('literal' in mainToken) {
-			literal = mainToken.literal;
-		}
-		else if ('token' in mainToken) {
-			literal = this.render(template, mainToken.token);
-		}
-
-
+		return this.renderToken(template, mainToken);
 	};
 
-	TemplatingEngine.prototype.applyOperator = function (mainToken) {
+	TemplatingEngine.prototype.renderToken = function (template, mainToken) {
+		var iterations = this.applyQuantifier(mainToken);
+
+		var literals = [];
+		var literal = null;
+
+		for (var i = 0; i < iterations; i++) {			
+			if ('literal' in mainToken) {
+				literal = mainToken.literal;
+			}
+			else if ('token' in mainToken) {
+				literal = this.render(template, mainToken.token);
+			}
+			else {
+				literal = this.applyOperator(template, mainToken);
+			}
+		}
+
+		return literals.join('');
+	};
+
+	TemplatingEngine.prototype.applyOperator = function (template, mainToken) {
 		if ('$or' in mainToken) {
-			return this.applyOrOperator(mainToken);
+			return this.applyOrOperator(template, mainToken);
 		}
 
 		if ('$and' in mainToken) {
-			return this.applyOrOperator(mainToken);
+			return this.applyOrOperator(template, mainToken);
 		}
 
 		throw new Error(
 			'TemplatingEngine: No valid operator in object `' + JSON.stringify(mainToken) + '`'
 		);
+	};
+
+	TemplatingEngine.prototype.applyOrOperator = function (template, mainToken) {
+		var tokens = mainToken.$or;
+
+		return tokens
+			.map(function (token) {
+				return this.renderToken(template, token);
+			}.bind(this));
+	};
+
+	TemplatingEngine.prototype.applyAndOperator = function (template, mainToken) {
+		var tokens = mainToken.$and;
+
+		var index = Util.getRandomInt(0, token.length - 1);
+
+		return this.renderToken(template, tokens[index]);
 	};
 
 	TemplatingEngine.prototype.applyQuantifier = function (mainToken) {
@@ -81,10 +110,6 @@ module.exports = (function () {
 
 		return Util.getRandomInt(range[0], range[1]);
 	};
-
-	TemplatingEngine.prototype.applyOrOperator = function () {};
-
-	TemplatingEngine.prototype.applyAndOperator = function () {};
 
 	return new TemplatingEngine();
 });

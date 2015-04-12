@@ -13,27 +13,25 @@ module.exports = (function () {
 					token: 'request_line'
 				},
 				{
-					tokens: {
-						$and: [
-							{
-								$or: [
-									{
-										token: 'general_header'
-									},
-									{
-										token: 'request_header'
-									},
-									{
-										token: 'entity_header'
-									}
-								]
-							},
-							{
-								token: 'CRLF'
-							}
-						],
-						quantifier: '*'
-					}
+					$and: [
+						{
+							$or: [
+								{
+									token: 'general_header'
+								},
+								{
+									token: 'request_header'
+								},
+								{
+									token: 'entity_header'
+								}
+							]
+						},
+						{
+							token: 'CRLF'
+						}
+					],
+					quantifier: '*'
 				},
 				{
 					token: 'CRLF'
@@ -343,12 +341,22 @@ module.exports = (function () {
 			]
 		},
 
-		field_content: null,
-		message_body: null,
+		field_content: {
+			literal: null
+		},
+		message_body: {
+			literal: null
+		},
 
-		absolute_uri: null,
-		abs_path: null,
-		authority: null,
+		absolute_uri: {
+			literal: null
+		},
+		abs_path: {
+			literal: null
+		},
+		authority: {
+			literal: null
+		},
 
 		token: {
 			// any CHAR except CTLs or separators
