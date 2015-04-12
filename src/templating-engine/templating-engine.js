@@ -50,6 +50,8 @@ module.exports = (function () {
 			else {
 				literal = this.applyOperator(template, mainToken);
 			}
+
+			literals.push(literal);
 		}
 
 		return literals.join('');
@@ -75,17 +77,14 @@ module.exports = (function () {
 		return tokens
 			.map(function (token) {
 				return this.renderToken(template, token);
-			}.bind(this));
+			}.bind(this))
+			.join('');
 	};
 
 	TemplatingEngine.prototype.applyOrOperator = function (template, mainToken) {
 		var tokens = mainToken.$or;
 
 		var index = Util.getRandomInt(0, tokens.length - 1);
-
-		console.log('TOKENS=', tokens);
-		console.log('INDEX=', index);
-		console.log('TOKEN=', tokens[index]);
 
 		return this.renderToken(template, tokens[index]);
 	};

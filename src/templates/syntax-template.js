@@ -47,9 +47,40 @@ module.exports = (function () {
 		},
 
 		CTL: {
-			$or: (
-				new Array(31)
-			)
+			$or: [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31
+			]
 			.map(function (item, index) {
 				return {
 					literal: String.fromCharCode(index)
@@ -129,14 +160,95 @@ module.exports = (function () {
 		},
 
 		DIGIT: {
-			$or: (
-				new Array(10)
-			)
+			$or: [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9
+			]
 			.map(function (item, index) {
 				return {
 					literal: String.fromCharCode(48 + index)
 				};
 			})
+		},
+
+		CHAR: {
+			$or: []
+			.concat(
+				[
+					0,
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12,
+					13,
+					14,
+					15,
+					16,
+					17,
+					18,
+					19,
+					20,
+					21,
+					22,
+					23,
+					24,
+					25
+				]
+				.map(function (item, index) {
+					return {
+						literal: String.fromCharCode(65 + index)
+					};
+				}),
+				[
+					0,
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12,
+					13,
+					14,
+					15,
+					16,
+					17,
+					18,
+					19,
+					20,
+					21,
+					22,
+					23,
+					24,
+					25
+				]
+				.map(function (item, index) {
+					return {
+						literal: String.fromCharCode(97 + index)
+					};
+				})
+			)
 		}
 
 	};

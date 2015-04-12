@@ -49,13 +49,13 @@ module.exports = (function () {
 					token: 'method'
 				},
 				{
-					literal: 'SP'
+					token: 'SP'
 				},
 				{
 					token: 'request_uri'
 				},
 				{
-					literal: 'SP'
+					token: 'SP'
 				},
 				{
 					token: 'http_version'
