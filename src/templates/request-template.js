@@ -1,7 +1,11 @@
+var SyntaxTemplate = require('./syntax-template');
+
+var _ = require('underscore');
+
 module.exports = (function () {
 	'use strict';
 
-	return {
+	return _.extend(SyntaxTemplate, {
 
 		request: {
 			$and: [
@@ -352,5 +356,5 @@ module.exports = (function () {
 			quantifier: '+'
 		}
 
-	};
+	});
 });
