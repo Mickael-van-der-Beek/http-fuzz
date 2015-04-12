@@ -126,7 +126,18 @@ module.exports = (function () {
 
 		HT: {
 			literal: '\t'
+		},
+
+		DIGIT: {
+			$or: (
+				new Array(10)
+			)
+			.map(function (item, index) {
+				return {
+					literal: String.fromCharCode(48 + index)
+				};
+			})
 		}
 
 	};
-});
+})();

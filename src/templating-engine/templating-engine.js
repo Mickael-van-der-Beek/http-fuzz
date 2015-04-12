@@ -56,11 +56,11 @@ module.exports = (function () {
 	};
 
 	TemplatingEngine.prototype.applyOperator = function (template, mainToken) {
-		if ('$or' in mainToken) {
-			return this.applyOrOperator(template, mainToken);
+		if ('$and' in mainToken) {
+			return this.applyAndOperator(template, mainToken);
 		}
 
-		if ('$and' in mainToken) {
+		if ('$or' in mainToken) {
 			return this.applyOrOperator(template, mainToken);
 		}
 
@@ -69,8 +69,8 @@ module.exports = (function () {
 		);
 	};
 
-	TemplatingEngine.prototype.applyOrOperator = function (template, mainToken) {
-		var tokens = mainToken.$or;
+	TemplatingEngine.prototype.applyAndOperator = function (template, mainToken) {
+		var tokens = mainToken.$and;
 
 		return tokens
 			.map(function (token) {
@@ -78,10 +78,14 @@ module.exports = (function () {
 			}.bind(this));
 	};
 
-	TemplatingEngine.prototype.applyAndOperator = function (template, mainToken) {
-		var tokens = mainToken.$and;
+	TemplatingEngine.prototype.applyOrOperator = function (template, mainToken) {
+		var tokens = mainToken.$or;
 
-		var index = Util.getRandomInt(0, token.length - 1);
+		var index = Util.getRandomInt(0, tokens.length - 1);
+
+		console.log('TOKENS=', tokens);
+		console.log('INDEX=', index);
+		console.log('TOKEN=', tokens[index]);
 
 		return this.renderToken(template, tokens[index]);
 	};
@@ -112,4 +116,4 @@ module.exports = (function () {
 	};
 
 	return new TemplatingEngine();
-});
+})();
