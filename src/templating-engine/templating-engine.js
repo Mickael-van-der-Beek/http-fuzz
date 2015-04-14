@@ -14,7 +14,7 @@ module.exports = (function () {
 		];
 		this.plusOperatorRange = config.plusOperatorRange || [
 			1,
-			2
+			4
 		];
 		this.optionalOperatorRange = config.optionalOperatorRange || [
 			0,
