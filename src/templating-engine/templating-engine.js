@@ -5,8 +5,14 @@ module.exports = (function () {
 
 	function TemplatingEngine () {}
 
+	/**
+	 * Initialization logic
+	 */
+
 	TemplatingEngine.prototype.init = function (config) {
 		config = config || {};
+
+		this.middlewares = {};
 
 		this.starOperatorRange = config.starOperatorRange || [
 			0,
@@ -22,6 +28,10 @@ module.exports = (function () {
 		];
 	};
 
+	/**
+	 * Rendering logic
+	 */
+
 	TemplatingEngine.prototype.render = function (template, mainKey) {
 		if (!(mainKey in template)) {
 			throw new Error(
@@ -29,9 +39,7 @@ module.exports = (function () {
 			);
 		}
 
-		var mainToken = template[mainKey];
-
-		return this.renderToken(template, mainToken);
+		return this.renderToken(template, template[mainKey]);
 	};
 
 	TemplatingEngine.prototype.renderToken = function (template, mainToken) {
@@ -45,7 +53,7 @@ module.exports = (function () {
 				literal = mainToken.literal;
 			}
 			else if ('token' in mainToken) {
-				literal = this.render(template, mainToken.token);
+				literal = this.resolveToken(template, mainToken.token);
 			}
 			else {
 				literal = this.applyOperator(template, mainToken);
@@ -112,6 +120,33 @@ module.exports = (function () {
 		}
 
 		return Util.getRandomInt(range[0], range[1]);
+	};
+
+	/**
+	 * Middleware logic
+	 */
+
+	TemplatingEngine.prototype.addMiddleware = function (token, middleware) {
+		if (token in this.middlewares) {
+			throw new Error(
+				'TemplatingEngine: Middleware already registered for token `' + token + '`'
+			);
+		}
+
+		this.middlewares[token] = middleware;
+	};
+
+	TemplatingEngine.prototype.resolveToken = function (template, token) {
+		var resolvedToken = null;
+
+		if (token in this.middlewares) {
+			resolvedToken = this.middlewares[token](template, token);
+		}
+		else {
+			resolvedToken = this.render(template, token);
+		}
+
+		return resolvedToken;
 	};
 
 	return new TemplatingEngine();

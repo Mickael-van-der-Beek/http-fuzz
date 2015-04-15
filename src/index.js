@@ -9,8 +9,17 @@ var assert = require('assert');
 module.exports = (function () {
 	'use strict';
 
-	TemplatingEngine.init({});
 	Client.init(ClientConfig);
+
+	TemplatingEngine.init({});
+
+	TemplatingEngine.addMiddleware('general_header', function (template, token) {
+		return 'LOOOOOOOOOOL';
+	});
+
+	// Client.send('GET * HTTP/7699.8650\r\nAccept:\s\t\s\t\s\t\r\n\r\n\r\n', function () {
+	// 	console.log(arguments);
+	// });
 
 	var responseHashMap = {};
 	var errorHashMap = {};
@@ -21,11 +30,15 @@ module.exports = (function () {
 		Client.send(request, function (e, response) {
 			if (response) {
 				if (typeof response !== 'string') {
+					responseHashMap.EMPTY = {
+						request: request,
+						response: response
+					};
 					console.log(new Array(81).join('-'));
 					console.log(request);
 					console.log(new Array(41).join('+'));
 					console.log(response);
-					console.log(new Array(81).join('-'));				
+					console.log(new Array(81).join('-'));
 				}
 				else {
 					var responseHash = require('crypto')
@@ -80,17 +93,17 @@ module.exports = (function () {
 		});
 	};
 
-	process.on('SIGINT', function() {
-		console.log(responseHashMap);
-		console.log(errorHashMap);
-		process.exit();
-	});
+	// process.on('SIGINT', function() {
+	// 	console.log(responseHashMap);
+	// 	console.log(errorHashMap);
+	// 	process.exit();
+	// });
 
-	process.on('uncaughtException', function() {
-		console.log(responseHashMap);
-		console.log(errorHashMap);
-		process.exit();
-	});
+	// process.on('uncaughtException', function() {
+	// 	console.log(responseHashMap);
+	// 	console.log(errorHashMap);
+	// 	process.exit();
+	// });
 
 	fuzz();
 })();
