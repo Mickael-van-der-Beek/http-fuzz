@@ -309,7 +309,7 @@ module.exports = (function () {
 		mailbox: {
 			$or: [
 				{
-					token: 'addr-spec'
+					token: 'addr_spec'
 				},
 				{
 					$and: [
@@ -319,7 +319,7 @@ module.exports = (function () {
 							quantifier: '?'
 						},
 						{
-							token: 'route-addr'
+							token: 'route_addr'
 						}
 					]
 				}
@@ -333,7 +333,7 @@ module.exports = (function () {
 		addr_spec: 	{
 			$and: [
 				{
-					token: 'local-part'
+					token: 'local_part'
 				},
 				{
 					literal: '@'
@@ -376,7 +376,7 @@ module.exports = (function () {
 					token: 'atom'
 				},
 				{
-					token: 'quoted-string'
+					token: 'quoted_string'
 				}
 			]
 		},
@@ -388,7 +388,7 @@ module.exports = (function () {
 		domain: {
 			$and: [
 				{
-					token: 'sub-domain'
+					token: 'sub_domain'
 				},
 				{
 					$and: [
@@ -396,7 +396,7 @@ module.exports = (function () {
 							literal: '.'
 						},
 						{
-							token: 'sub-domain'
+							token: 'sub_domain'
 						}
 					],
 					quantifier: '*'
@@ -411,10 +411,10 @@ module.exports = (function () {
 		sub_domain: {
 			$or: [
 				{
-					token: 'domain-ref'
+					token: 'domain_ref'
 				},
 				{
-					token: 'domain-literal'
+					token: 'domain_literal'
 				}
 			]
 		},
@@ -450,7 +450,7 @@ module.exports = (function () {
 					quantifier: '?'
 				},
 				{
-					token: 'addr-spec'
+					token: 'addr_spec'
 				},
 				{
 					literal: '>'
