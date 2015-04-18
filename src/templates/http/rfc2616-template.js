@@ -1441,46 +1441,278 @@ module.exports = (function () {
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
 		 */
 		general_header: {
+			$or: [
+				{
+					token: 'Cache-Control'
+				},
+				{
+					literal: 'Connection'
+				},
+				{
+					literal: 'Date'
+				},
+				{
+					literal: 'Pragma'
+				},
+				{
+					literal: 'Trailer'
+				},
+				{
+					literal: 'Transfer-Encoding'
+				},
+				{
+					literal: 'Upgrade'
+				},
+				{
+					literal: 'Via'
+				},
+				{
+					literal: 'Warning'
+				}
+			]
+		},
+
+		/**
+		 * name: Cache-Control
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.9
+		 */
+		cache_control: {
 			$and: [
 				{
-					$or: [
-						{
-							literal: 'Cache-Control'
-						},
-						{
-							literal: 'Connection'
-						},
-						{
-							literal: 'Date'
-						},
-						{
-							literal: 'Pragma'
-						},
-						{
-							literal: 'Trailer'
-						},
-						{
-							literal: 'Transfer-Encoding'
-						},
-						{
-							literal: 'Upgrade'
-						},
-						{
-							literal: 'Via'
-						},
-						{
-							literal: 'Warning'
-						}
-					]
+					literal: 'Cache-Control'
 				},
 				{
 					literal: ':'
 				},
 				{
-					token: 'field_value',
-					quantifier: '?'
+					token: 'cache_directive',
+					quantifier: '1#'
 				}
 			]
+		},
+
+		/**
+		 * name: cache-directive
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.9
+		 */
+		cache_directive: {
+			$or: [
+				{
+					token: 'cache_request_directive'
+				},
+				{
+					token: 'cache_response_directive'
+				}
+			]
+		},
+
+		/**
+		 * name: cache-request-directive
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.9
+		 */
+		cache_request_directive: {
+			$or: [
+				{
+					literal: 'no-cache'
+				},
+				{
+					literal: 'no-store'
+				},
+				{
+					$and: [
+						{
+							literal: 'max-age'
+						},
+						{
+							literal: '='
+						},
+						{
+							token: 'delta_seconds'
+						}
+					]
+				},
+				{
+					$and: [
+						{
+							literal: 'max-stale'
+						},
+						{
+							$and: [
+								{
+									literal: '='
+								},
+								{
+									token: 'delta_seconds'
+								}
+							],
+							quantifier: '?'
+						}
+					]
+				},
+				{
+					$and: [
+						{
+							literal: 'min-fresh'
+						},
+						{
+							literal: '='
+						},
+						{
+							token: 'delta_seconds'
+						}
+					]
+				},
+				{
+					literal: 'no-transform'
+				},
+				{
+					literal: 'only-if-cached'
+				},
+				{
+					token: 'cache_extension'
+				}
+			]
+		},
+
+		/**
+		 * name: cache-extension
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.9
+		 */
+		cache_extension: {
+			$and: [
+				{
+					token: 'token'
+				},
+				{
+					$and: [
+						{
+							literal: '='
+						},
+						{
+							$or: [
+								{
+									token: 'token'
+								},
+								{
+									token: 'quoted_string'
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: cache-response-directive
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.9
+		 */
+		cache_response_directive: {
+			$or: [
+				{
+					literal: 'public'
+				},
+				{
+					$and: [
+						{
+							literal: 'private'
+						},
+						{
+							$and: [
+								{
+									literal: '='
+								},
+								{
+									literal: '"'
+								},
+								{
+									token: 'field-name',
+									quantifier: '1#'
+								},
+								{
+									literal: '"'
+								}
+							],
+							quantifier: '?'
+						}
+					]
+				},
+				{
+					$and: [
+						{
+							literal: 'no-cache'
+						},
+						{
+							$and: [
+								{
+									literal: '='
+								},
+								{
+									literal: '"'
+								},
+								{
+									token: 'field-name',
+									quantifier: '1#'
+								},
+								{
+									literal: '"'
+								}
+							],
+							quantifier: '?'
+						}
+					]
+				},
+				{
+					literal: 'no-store'
+				},
+				{
+					literal: 'no-transform'
+				},
+				{
+					literal: 'must-revalidate'
+				},
+				{
+					literal: 'proxy-revalidate'
+				},
+				{
+					$and: [
+						{
+							literal: 'max-age'
+						},
+						{
+							literal: '='
+						},
+						{
+							token: 'delta_seconds'
+						}
+					]
+				},
+				{
+					$and: [
+						{
+							literal: 's-maxage'
+						},
+						{
+							literal: '='
+						},
+						{
+							token: 'delta_seconds'
+						}
+					]
+				},
+				{
+					token: 'cache_extension'
+				}
+			]
+		},
+
+		/**
+		 * name: delta-seconds
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.2
+		 */
+		delta_seconds: {
+			token: 'DIGIT',
+			quantifier: '1*'
 		},
 
 		/**
