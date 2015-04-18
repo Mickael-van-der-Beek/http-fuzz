@@ -1,11 +1,12 @@
 var RFC822FormatTemplate = require('../format/rfc822-template');
+var RFC3986FormatTemplate = require('../uri/rfc3986-template');
 
 var _ = require('underscore');
 
 module.exports = (function () {
 	'use strict';
 
-	return _.extend(RFC822FormatTemplate, {
+	return _.extend(RFC822FormatTemplate, RFC3986FormatTemplate, {
 
 		/**
 		 * name: Request
@@ -511,7 +512,36 @@ module.exports = (function () {
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.3
 		 */
 		message_body: {
-			literal: null
+			token: 'entity_body'
+		},
+
+		/**
+		 * name: entity-body
+		 * ref: https://tools.ietf.org/html/rfc2616#section-7.2
+		 *
+		 * Missing middleware:
+		 * https://tools.ietf.org/html/rfc2616#section-7.2.1
+		 * https://tools.ietf.org/html/rfc2616#section-7.2.2
+		 */
+		entity_body: {
+			token: 'OCTET',
+			quantifier: '*'
+		},
+
+		/**
+		 * name: OCTET
+		 * ref: https://tools.ietf.org/html/rfc2616#section-2.2
+		 */
+		OCTET: {
+			$or: Array.apply(
+					null,
+					new Array(256)
+				)
+				.map(function (item, index) {
+					return {
+						literal: new Buffer([ index ]).toString('utf8')
+					};
+				})
 		}
 
 	});
