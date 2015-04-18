@@ -1274,7 +1274,50 @@ module.exports = (function () {
 							token: 'absolute_uri'
 						},
 						{
+							// TODO: Implement this token
 							token: 'relative_uri'
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: TE
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.39
+		 */
+		te: {
+			$and: [
+				{
+					literal: 'TE'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 't_codings',
+					quantifier: '#'
+				}
+			]
+		},
+
+		/**
+		 * name: t-codings
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.39
+		 */
+		t_codings: {
+			$or: [
+				{
+					literal: 'trailers'
+				},
+				{
+					$and: [
+						{
+							token: 'transfer-extension'
+						},
+						{
+							token: 'accept-params',
+							quantifier: '?'
 						}
 					]
 				}
