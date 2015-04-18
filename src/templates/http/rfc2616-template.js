@@ -1325,6 +1325,99 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: User-Agent
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.43
+		 */
+		user_agent: {
+			$and: [
+				{
+					literal: 'User-Agent'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$or: [
+						{
+							token: 'product'
+						},
+						{
+							token: 'comment'
+						}
+					],
+					quantifier: '1*'
+				}
+			]
+		},
+
+		/**
+		 * name: product
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.8
+		 */
+		product: {
+			$and: [
+				{
+					token: 'token'
+				},
+				{
+					$and: [
+						{
+							literal: '/'
+						},
+						{
+							token: 'product-version'
+						}
+					],
+					quantifier: '?'
+				}
+			]
+		},
+
+		/**
+		 * name: product-version
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.8
+		 */
+		product_version: {
+			token: 'token'
+		},
+
+		/**
+		 * name: comment
+		 * ref: https://tools.ietf.org/html/rfc2616#section-2.2
+		 */
+		comment: {
+			$and: [
+				{
+					literal: '('
+				},
+				{
+					$and: [
+						{
+							token: 'ctext'
+						},
+						{
+							token: 'quoted-pair'
+						},
+						{
+							// This is a circular reference which could become an issue
+							token: 'comment'
+						}
+					],
+					quantifier: '*'
+				},
+				{
+					literal: ')'
+				}
+			]
+		},
+
+		/**
+		 * name: ctext
+		 * ref: https://tools.ietf.org/html/rfc2616#section-2.2
+		 */
+		ctext: null,
+
+		/**
 		 * name: general-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
 		 */

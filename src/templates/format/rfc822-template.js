@@ -126,6 +126,7 @@ module.exports = (function () {
 		/**
 		 * name: quoted-string
 		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
+		 * notes: RFC2616 uses the "qdtext" token rather than "qtext"
 		 */
 		quoted_string: {
 			$and: [
