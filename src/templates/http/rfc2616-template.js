@@ -800,6 +800,357 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: If-Modified-Since
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.25
+		 */
+		if_modified_since: {
+			$and: [
+				{
+					literal: 'If-Modified-Since'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'http_date'
+				}
+			]
+		},
+
+		/**
+		 * name: HTTP-date
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		http_date: {
+			$or: [
+				{
+					token: 'rfc1123_date'
+				},
+				{
+					token: 'rfc850_date'
+				},
+				{
+					token: 'asctime_date'
+				}
+			]
+		},
+
+		/**
+		 * name: rfc1123-date
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		rfc1123_date: {
+			$and: [
+				{
+					token: 'wkday'
+				},
+				{
+					literal: ','
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'date1'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'time'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					literal: 'GMT'
+				}
+			]
+		},
+
+		/**
+		 * name: rfc850-date
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		rfc850_date: {
+			$and: [
+				{
+					token: 'weekday'
+				},
+				{
+					literal: ','
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'date2'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'time'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					literal: 'GMT'
+				}
+			]
+		},
+
+		/**
+		 * name: asctime-date
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		asctime_date: {
+			$and: [
+				{
+					token: 'wkday'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'date3'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'time'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'DIGIT',
+					quantifier: '4'
+				}
+			]
+		},
+
+		/**
+		 * name: date1
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		date1: {
+			$and: [
+				{
+					token: 'DIGIT',
+					quantifier: '2'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'month'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'DIGIT',
+					quantifier: '4'
+				}
+			]
+		},
+
+		/**
+		 * name: date2
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		date2: {
+			$and: [
+				{
+					token: 'DIGIT',
+					quantifier: '2'
+				},
+				{
+					literal: '-'
+				},
+				{
+					token: 'month'
+				},
+				{
+					literal: '-'
+				},
+				{
+					token: 'DIGIT',
+					quantifier: '2'
+				}
+			]
+		},
+
+		/**
+		 * name: date3
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		date3: {
+			$and: [
+				{
+					token: 'month'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					$or: [
+						{
+							token: 'DIGIT',
+							quantifier: '2'
+						},
+						{
+							$and: [
+								{
+									token: 'SP'
+								},
+								{
+									token: 'DIGIT',
+									quantifier: '1'
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: time
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		time: {
+			$and: [
+				{
+					token: 'DIGIT',
+					quantifier: '2'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'DIGIT',
+					quantifier: '2'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'DIGIT',
+					quantifier: '2'
+				}
+			]
+		},
+
+		/**
+		 * name: wkday
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		wkday: {
+			$or: [
+				{
+					literal: 'Mon'
+				},
+				{
+					literal: 'Tue'
+				},
+				{
+					literal: 'Wed'
+				},
+				{
+					literal: 'Thu'
+				},
+				{
+					literal: 'Fri'
+				},
+				{
+					literal: 'Sat'
+				},
+				{
+					literal: 'Sun'
+				}
+			]
+		},
+
+		/**
+		 * name: weekday
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		weekday: {
+			$or: [
+				{
+					literal: 'Monday'
+				},
+				{
+					literal: 'Tuesday'
+				},
+				{
+					literal: 'Wednesday'
+				},
+				{
+					literal: 'Thursday'
+				},
+				{
+					literal: 'Friday'
+				},
+				{
+					literal: 'Saturday'
+				},
+				{
+					literal: 'Sunday'
+				}
+			]
+		},
+
+		/**
+		 * name: month
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.3.1
+		 */
+		month: {
+			$or: [
+				{
+					literal: 'Jan'
+				},
+				{
+					literal: 'Feb'
+				},
+				{
+					literal: 'Mar'
+				},
+				{
+					literal: 'Apr'
+				},
+				{
+					literal: 'May'
+				},
+				{
+					literal: 'Jun'
+				},
+				{
+					literal: 'Jul'
+				},
+				{
+					literal: 'Aug'
+				},
+				{
+					literal: 'Sep'
+				},
+				{
+					literal: 'Oct'
+				},
+				{
+					literal: 'Nov'
+				},
+				{
+					literal: 'Dec'
+				}
+			]
+		},
+
+		/**
 		 * name: general-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
 		 */
