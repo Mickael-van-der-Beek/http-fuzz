@@ -111,7 +111,7 @@ module.exports = (function () {
 					literal: '-'
 				},
 				{
-					token: 'suffix-length'
+					token: 'suffix_length'
 				}
 			]
 		},

@@ -772,7 +772,7 @@ module.exports = (function () {
 					quantifier: '?'
 				},
 				{
-					token: 'opaque-tag'
+					token: 'opaque_tag'
 				}
 			]
 		},
@@ -797,7 +797,7 @@ module.exports = (function () {
 		 * ref: https://tools.ietf.org/html/rfc2616#section-3.11
 		 */
 		opaque_tag: {
-			token: 'quoted-string'
+			token: 'quoted_string'
 		},
 
 		/**
@@ -1169,7 +1169,7 @@ module.exports = (function () {
 							literal: '*'
 						},
 						{
-							token: 'entity-tag',
+							token: 'entity_tag',
 							quantifier: '1#'
 						}
 					]
@@ -1192,10 +1192,10 @@ module.exports = (function () {
 				{
 					$or: [
 						{
-							token: 'entity-tag'
+							token: 'entity_tag'
 						},
 						{
-							token: 'http-date'
+							token: 'http_date'
 						}
 					]
 				}
@@ -1215,7 +1215,7 @@ module.exports = (function () {
 					literal: ':'
 				},
 				{
-					token: 'http-date'
+					token: 'http_date'
 				}
 			]
 		},
@@ -1335,7 +1335,7 @@ module.exports = (function () {
 							token: 'transfer_extension'
 						},
 						{
-							token: 'accept-params',
+							token: 'accept_params',
 							quantifier: '?'
 						}
 					]
@@ -1384,7 +1384,7 @@ module.exports = (function () {
 							literal: '/'
 						},
 						{
-							token: 'product-version'
+							token: 'product_version'
 						}
 					],
 					quantifier: '?'
@@ -1415,7 +1415,7 @@ module.exports = (function () {
 							token: 'ctext'
 						},
 						{
-							token: 'quoted-pair'
+							token: 'quoted_pair'
 						},
 						{
 							// This is a circular reference which could become an issue
@@ -1626,7 +1626,7 @@ module.exports = (function () {
 									literal: '"'
 								},
 								{
-									token: 'field-name',
+									token: 'field_name',
 									quantifier: '1#'
 								},
 								{
@@ -1651,7 +1651,7 @@ module.exports = (function () {
 									literal: '"'
 								},
 								{
-									token: 'field-name',
+									token: 'field_name',
 									quantifier: '1#'
 								},
 								{
@@ -1728,7 +1728,7 @@ module.exports = (function () {
 					literal: ':'
 				},
 				{
-					token: 'connection-token',
+					token: 'connection_token',
 					quantifier: '1#'
 				}
 			]
@@ -1773,7 +1773,7 @@ module.exports = (function () {
 					literal: ':'
 				},
 				{
-					token: 'pragma-directive',
+					token: 'pragma_directive',
 					quantifier: '1#'
 				}
 			]
@@ -1789,7 +1789,7 @@ module.exports = (function () {
 					literal: 'no-cache'
 				},
 				{
-					token: 'extension-pragma'
+					token: 'extension_pragma'
 				}
 			]
 		},
@@ -1814,7 +1814,7 @@ module.exports = (function () {
 									token: 'token'
 								},
 								{
-									token: 'quoted-string'
+									token: 'quoted_string'
 								}
 							]
 						}
@@ -1836,7 +1836,7 @@ module.exports = (function () {
 					literal: ':'
 				},
 				{
-					token: 'field-name',
+					token: 'field_name',
 					quantifier: '1#'
 				}
 			]
@@ -1855,7 +1855,7 @@ module.exports = (function () {
 					literal: ':'
 				},
 				{
-					token: 'transfer-coding',
+					token: 'transfer_coding',
 					quantifier: '1#'
 				}
 			]
@@ -1871,7 +1871,7 @@ module.exports = (function () {
 					literal: 'chunked'
 				},
 				{
-					token: 'transfer-extension'
+					token: 'transfer_extension'
 				}
 			]
 		},
@@ -1935,7 +1935,7 @@ module.exports = (function () {
 					token: 'token'
 				},
 				{
-					token: 'quoted-string'
+					token: 'quoted_string'
 				}
 			]
 		},
@@ -1998,7 +1998,7 @@ module.exports = (function () {
 				{
 					$and: [
 						{
-							token: 'protocol-name'
+							token: 'protocol_name'
 						},
 						{
 							literal: '/'
@@ -2007,7 +2007,7 @@ module.exports = (function () {
 					quantifier: '?'
 				},
 				{
-					token: 'protocol-version'
+					token: 'protocol_version'
 				}
 			]
 		},
@@ -2259,7 +2259,7 @@ module.exports = (function () {
 					literal: ':'
 				},
 				{
-					token: 'content-coding',
+					token: 'content_coding',
 					quantifier: '#'
 				}
 			]
@@ -2291,7 +2291,7 @@ module.exports = (function () {
 		language_tag: {
 			$and: [
 				{
-					token: 'primary-tag'
+					token: 'primary_tag'
 				},
 				{
 					$and: [
@@ -2382,7 +2382,7 @@ module.exports = (function () {
 					literal: ':'
 				},
 				{
-					token: 'md5-digest'
+					token: 'md5_digest'
 				}
 			]
 		},
