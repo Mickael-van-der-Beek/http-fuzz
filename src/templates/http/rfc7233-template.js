@@ -1,11 +1,12 @@
 var RFC822FormatTemplate = require('../format/rfc822-template');
+var RFC5234FormatTemplate = require('../format/rfc5234-template');
 
 var _ = require('underscore');
 
 module.exports = (function () {
 	'use strict';
 
-	return _.extend(RFC822FormatTemplate, {
+	return _.extend(RFC822FormatTemplate, RFC5234FormatTemplate, {
 
 		/**
 		 * name: range_specifier
@@ -144,15 +145,21 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: other-range-unit
+		 * ref: https://tools.ietf.org/html/rfc7233#section-2.2
+		 */
+		other_range_unit: {
+			token: 'token'
+		},
+
+		/**
 		 * name: other-range-set
 		 * ref: https://tools.ietf.org/html/rfc7233#section-3.1
 		 */
 		other_range_set: {
 			token: 'VCHAR',
 			quantifier: '1*'
-		},
-
-		
+		}		
 
 	});
 })();
