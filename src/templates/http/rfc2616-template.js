@@ -2499,6 +2499,24 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Content-Type
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.17
+		 */
+		content_type: {
+			$and: [
+				{
+					literal: 'Content-Type'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'media_type'
+				}
+			]
+		},
+
+		/**
 		 * name: extension-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
