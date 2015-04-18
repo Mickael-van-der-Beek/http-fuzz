@@ -2257,6 +2257,24 @@ module.exports = (function () {
 			]
 		},
 
+		/**
+		 * name: Content-Encoding
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.11
+		 */
+		content_encoding: {
+			$and: [
+				{
+					literal: 'Content-Encoding'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'content-coding',
+					quantifier: '#'
+				}
+			]
+		},
 
 		/**
 		 * name: extension-header
