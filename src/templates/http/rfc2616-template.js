@@ -1941,6 +1941,25 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Upgrade
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.42
+		 */
+		upgrade: {
+			$and: [
+				{
+					literal: 'Upgrade'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'product',
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
 		 * name: entity-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
