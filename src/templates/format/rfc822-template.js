@@ -305,6 +305,7 @@ module.exports = (function () {
 		/**
 		 * name: mailbox
 		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
+		 * notes: TODO
 		 */
 		mailbox: {
 			// TODO: Define the mailbox token and try to merge it with the rfc3986 URI definition

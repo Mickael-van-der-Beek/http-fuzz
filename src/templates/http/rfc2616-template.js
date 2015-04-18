@@ -1433,8 +1433,11 @@ module.exports = (function () {
 		/**
 		 * name: ctext
 		 * ref: https://tools.ietf.org/html/rfc2616#section-2.2
+		 * notes: TODO
 		 */
-		ctext: null,
+		ctext: {
+			token: 'text'
+		},
 
 		/**
 		 * name: general-header

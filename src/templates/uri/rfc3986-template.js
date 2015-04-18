@@ -8,6 +8,30 @@ module.exports = (function () {
 	return _.extend(RFC822FormatTemplate, {
 
 		/**
+		 * name: relativeURI
+		 * ref: https://tools.ietf.org/html/rfc3986#appendix-D.2
+		 */
+		relative_uri: {
+			$and: [
+				{
+					// RFC3986 uses token "relative-part" which is identical to "hier-part"
+					token: 'hier_part'
+				},
+				{
+					$and: [
+						{
+							literal: '?'
+						},
+						{
+							token: 'query'
+						}
+					],
+					quantifier: '?'
+				}
+			]
+		},
+
+		/**
 		 * name: absolute-URI
 		 * ref: http://tools.ietf.org/html/rfc3986#section-4.3
 		 */

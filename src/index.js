@@ -89,21 +89,24 @@ module.exports = (function () {
 
 			setTimeout(function () {
 				fuzz();
-			}, 1000 * 3);
+			}, 1000);
 		});
 	};
 
-	// process.on('SIGINT', function() {
-	// 	console.log(responseHashMap);
-	// 	console.log(errorHashMap);
-	// 	process.exit();
-	// });
+	process.on('SIGINT', function() {
+		console.log(responseHashMap);
+		console.log(errorHashMap);
+		process.exit();
+	});
 
-	// process.on('uncaughtException', function() {
-	// 	console.log(responseHashMap);
-	// 	console.log(errorHashMap);
-	// 	process.exit();
-	// });
+	process.on('uncaughtException', function (e) {
+		console.error(e);
+		console.error(e.stack);
+		console.log('\n\n');
+		console.log(responseHashMap);
+		console.log(errorHashMap);
+		process.exit();
+	});
 
 	fuzz();
 })();
