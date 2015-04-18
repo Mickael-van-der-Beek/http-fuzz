@@ -2067,6 +2067,125 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Warning
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.46
+		 */
+		warning: {
+			$and: [
+				{
+					literal: 'Warning'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'warning_value',
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
+		 * name: warning-value
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.46
+		 */
+		warning_value: {
+			$and: [
+				{
+					token: 'warn_code'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'warn_agent'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'warn_text'
+				},
+				{
+					$and: [
+						{
+							token: 'SP'
+						},
+						{
+							token: 'warn_date'
+						}
+					],
+					quantifier: '?'
+				}
+			]
+		},
+
+		/**
+		 * name: warn-code
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.46
+		 */
+		warn_code: {
+			token: 'DIGIT',
+			quantifier: '3'
+		},
+
+		/**
+		 * name: warn-agent
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.46
+		 */
+		warn_agent: {
+			$or: [
+				{
+					$and: [
+						{
+							token: 'host'
+						},
+						{
+							$and: [
+								{
+									literal: ':'
+								},
+								{
+									token: 'port'
+								}
+							],
+							quantifier: '?'
+						}
+					]
+				},
+				{
+					token: 'pseudonym'
+				}
+			]
+		},
+
+		/**
+		 * name: warn-text
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.46
+		 */
+		warn_text: {
+			token: 'quoted_string'
+		},
+
+		/**
+		 * name: warn-date
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.46
+		 */
+		warn_date: {
+			$and: [
+				{
+					literal: '"'
+				},
+				{
+					token: 'http_date'
+				},
+				{
+					literal: '"'
+				}
+			]
+		},
+
+		/**
 		 * name: entity-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
