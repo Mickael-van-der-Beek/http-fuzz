@@ -2777,9 +2777,9 @@ module.exports = (function () {
 		/**
 		 * name: field-content
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.2
+		 * notes: The official definition is more complex but this is a temporary placeholder
 		 */
 		field_content: {
-			// The official definition is more complex but this is a temporary placeholder
 			token: 'OCTET',
 			quantifier: '*'
 		},

@@ -304,11 +304,9 @@ module.exports = (function () {
 
 		/**
 		 * name: mailbox
-		 * ref: https://tools.ietf.org/html/rfc822#section-6
-		 * notes: TODO
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
 		 */
 		mailbox: {
-			// TODO: Define the mailbox token and try to merge it with the rfc3986 URI definition
 			$or: [
 				{
 					token: 'addr-spec'
@@ -330,7 +328,7 @@ module.exports = (function () {
 
 		/**
 		 * name: addr-spec
-		 * ref: https://tools.ietf.org/html/rfc822#section-6
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
 		 */
 		addr_spec: 	{
 			$and: [
@@ -348,7 +346,7 @@ module.exports = (function () {
 
 		/**
 		 * name: local-part
-		 * ref: https://tools.ietf.org/html/rfc822#section-6
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
 		 */
 		local_part: {
 			$and: [
@@ -370,7 +368,7 @@ module.exports = (function () {
 
 		/**
 		 * name: word
-		 * ref: https://tools.ietf.org/html/rfc822#section-6
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
 		 */
 		word: {
 			$or: [
@@ -385,18 +383,120 @@ module.exports = (function () {
 
 		/**
 		 * name: domain
-		 * ref: https://tools.ietf.org/html/rfc822#section-6
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
 		 */
 		domain: {
-			$or: [
+			$and: [
 				{
-					token: 'atom'
+					token: 'sub-domain'
 				},
 				{
-					token: 'quoted-string'
+					$and: [
+						{
+							literal: '.'
+						},
+						{
+							token: 'sub-domain'
+						}
+					],
+					quantifier: '*'
 				}
 			]
 		},
+
+		/**
+		 * name: sub-domain
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
+		 */
+		sub_domain: {
+			$or: [
+				{
+					token: 'domain-ref'
+				},
+				{
+					token: 'domain-literal'
+				}
+			]
+		},
+
+		/**
+		 * name: domain-ref
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
+		 */
+		domain_ref: {
+			token: 'atom'
+		},
+
+		/**
+		 * name: phrase
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
+		 */
+		phrase: {
+			token: 'word',
+			quantifier: '1*'
+		},
+
+		/**
+		 * name: route-addr
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
+		 */
+		route_addr: {
+			$and: [
+				{
+					literal: '<'
+				},
+				{
+					token: 'route',
+					quantifier: '?'
+				},
+				{
+					token: 'addr-spec'
+				},
+				{
+					literal: '>'
+				}
+			]
+		},
+
+		/**
+		 * name: route
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
+		 */
+		route: {
+			$and: [
+				{
+					$and: [
+						{
+							literal: '@'
+						},
+						{
+							token: 'domain',
+						}
+					],
+					quantifier: '1#'
+				},
+				{
+					literal: ':'
+				}
+			]
+		},
+
+		/**
+		 * name: atom
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
+		 * notes: The official definition is more complex but this is a temporary placeholder
+		 */
+		atom: {
+			$or: Array.apply(
+					null,
+					new Array(128)
+				)
+				.map(function (item, index) {
+					return {
+						literal: String.fromCharCode(index)
+					};
+				})
+		}
 
 	};
 })();
