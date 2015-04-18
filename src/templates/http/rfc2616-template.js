@@ -2190,50 +2190,39 @@ module.exports = (function () {
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
 		entity_header: {
-			$and: [
+			$or: [
 				{
-					$or: [
-						{
-							literal: 'Allow'
-						},
-						{
-							literal: 'Content-Encoding'
-						},
-						{
-							literal: 'Content-Language'
-						},
-						{
-							literal: 'Content-Length'
-						},
-						{
-							literal: 'Content-Location'
-						},
-						{
-							literal: 'Content-MD5'
-						},
-						{
-							literal: 'Content-Range'
-						},
-						{
-							literal: 'Content-Type'
-						},
-						{
-							literal: 'Expires'
-						},
-						{
-							literal: 'Last-Modified'
-						},
-						{
-							token: 'extension_header'
-						}
-					]
+					literal: 'Allow'
 				},
 				{
-					literal: ':'
+					literal: 'Content-Encoding'
 				},
 				{
-					token: 'field_value',
-					quantifier: '?'
+					literal: 'Content-Language'
+				},
+				{
+					literal: 'Content-Length'
+				},
+				{
+					literal: 'Content-Location'
+				},
+				{
+					literal: 'Content-MD5'
+				},
+				{
+					literal: 'Content-Range'
+				},
+				{
+					literal: 'Content-Type'
+				},
+				{
+					literal: 'Expires'
+				},
+				{
+					literal: 'Last-Modified'
+				},
+				{
+					token: 'extension_header'
 				}
 			]
 		},
