@@ -1,5 +1,5 @@
 var TemplatingEngine = require('./templating-engine/templating-engine');
-var RequestTemplate = require('./templates/request-template');
+var RFC2616HttpTemplate = require('./templates/http/rfc2616-template');
 
 var ClientConfig = require('./config/client');
 var Client = require('./client/client');
@@ -13,9 +13,9 @@ module.exports = (function () {
 
 	TemplatingEngine.init({});
 
-	TemplatingEngine.addMiddleware('general_header', function (template, token) {
-		return 'LOOOOOOOOOOL';
-	});
+	// TemplatingEngine.addMiddleware('general_header', function (template, token) {
+	// 	return 'LOOOOOOOOOOL';
+	// });
 
 	// Client.send('GET * HTTP/7699.8650\r\nAccept:\s\t\s\t\s\t\r\n\r\n\r\n', function () {
 	// 	console.log(arguments);
@@ -25,7 +25,7 @@ module.exports = (function () {
 	var errorHashMap = {};
 
 	var fuzz = function fuzz () {
-		var request = TemplatingEngine.render(RequestTemplate, 'request');
+		var request = TemplatingEngine.render(RFC2616HttpTemplate, 'request');
 
 		Client.send(request, function (e, response) {
 			if (response) {

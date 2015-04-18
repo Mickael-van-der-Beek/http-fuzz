@@ -80,31 +80,47 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: ALPHA
+		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
+		 */
+		ALPHA: {
+			$or: []
+				.concat(
+					Array.apply(
+						null,
+						new Array(26)
+					)
+					.map(function (item, index) {
+						return {
+							literal: String.fromCharCode(65 + index)
+						};
+					}),
+					Array.apply(
+						null,
+						new Array(26)
+					)
+					.map(function (item, index) {
+						return {
+							literal: String.fromCharCode(97 + index)
+						};
+					})
+				)
+		},
+
+		/**
 		 * name: CHAR
 		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
 		 */
 		CHAR: {
-			$or: []
-			.concat(
-				Array.apply(
+			$or: Array.apply(
 					null,
-					new Array(26)
+					new Array(128)
 				)
 				.map(function (item, index) {
 					return {
-						literal: String.fromCharCode(65 + index)
-					};
-				}),
-				Array.apply(
-					null,
-					new Array(26)
-				)
-				.map(function (item, index) {
-					return {
-						literal: String.fromCharCode(97 + index)
+						literal: String.fromCharCode(index)
 					};
 				})
-			)
 		}
 
 	};
