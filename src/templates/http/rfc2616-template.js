@@ -1436,7 +1436,7 @@ module.exports = (function () {
 		 * notes: TODO
 		 */
 		ctext: {
-			token: 'text'
+			token: 'qtext'
 		},
 
 		/**

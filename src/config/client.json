@@ -1,6 +1,6 @@
 {
 	"timeout": 5000,
 
-	"host": "www.stackoverflow.com",
-	"port": 80
+	"host": "localhost",
+	"port": 3000
 }

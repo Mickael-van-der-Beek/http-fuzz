@@ -9,6 +9,7 @@
 
 ### Logs ###
 logs
+!logs/express
 *.log
 
 ### Runtime data ###
