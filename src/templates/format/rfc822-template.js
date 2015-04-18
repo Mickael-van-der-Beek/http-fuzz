@@ -108,6 +108,43 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: hex
+		 * ref: https://tools.ietf.org/html/rfc3986#appendix-D.2
+		 */
+		hex: {
+			$or: []
+				.concat(
+					Array.apply(
+						null,
+						new Array(10)
+					)
+					.map(function (item, index) {
+						return {
+							literal: String.fromCharCode(48 + index)
+						};
+					}),
+					Array.apply(
+						null,
+						new Array(6)
+					)
+					.map(function (item, index) {
+						return {
+							literal: String.fromCharCode(65 + index)
+						};
+					}),
+					Array.apply(
+						null,
+						new Array(6)
+					)
+					.map(function (item, index) {
+						return {
+							literal: String.fromCharCode(97 + index)
+						};
+					})
+				)
+		},
+
+		/**
 		 * name: CHAR
 		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
 		 */

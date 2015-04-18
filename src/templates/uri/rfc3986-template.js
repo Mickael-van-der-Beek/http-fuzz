@@ -192,10 +192,10 @@ module.exports = (function () {
 					literal: '%'
 				},
 				{
-					token: 'HEXDIG'
+					token: 'hex'
 				},
 				{
-					token: 'HEXDIG'
+					token: 'hex'
 				}
 			]
 		},
@@ -610,7 +610,7 @@ module.exports = (function () {
 		 * ref: http://tools.ietf.org/html/rfc3986#section-3.2.2
 		 */
 		h16: {
-			token: 'HEXDIG',
+			token: 'hex',
 			quantifier: '1*4'
 		},
 
@@ -727,7 +727,7 @@ module.exports = (function () {
 					literal: 'v'
 				},
 				{
-					token: 'HEXDIG',
+					token: 'hex',
 					quantifier: '+'
 				},
 				{

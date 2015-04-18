@@ -1,13 +1,14 @@
 var RFC822FormatTemplate = require('../format/rfc822-template');
 var RFC3986UriTemplate = require('../uri/rfc3986-template');
 var RFC2617HttpTemplate = require('./rfc2617-template');
+var RFC7233HttpTemplate = require('./rfc7233-template');
 
 var _ = require('underscore');
 
 module.exports = (function () {
 	'use strict';
 
-	return _.extend(RFC822FormatTemplate, RFC3986UriTemplate, RFC2617HttpTemplate, {
+	return _.extend(RFC822FormatTemplate, RFC3986UriTemplate, RFC2617HttpTemplate, RFC7233HttpTemplate, {
 
 		/**
 		 * name: Request
@@ -1252,6 +1253,24 @@ module.exports = (function () {
 				},
 				{
 					token: 'credentials'
+				}
+			]
+		},
+
+		/**
+		 * name: Range
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.35
+		 */
+		range: {
+			$and: [
+				{
+					literal: 'Range'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'range_specifier'
 				}
 			]
 		},
