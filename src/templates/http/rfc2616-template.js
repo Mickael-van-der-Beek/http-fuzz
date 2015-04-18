@@ -1257,6 +1257,31 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Referer
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.36
+		 */
+		referer: {
+			$and: [
+				{
+					literal: 'Referer'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$or: [
+						{
+							token: 'absolute_uri'
+						},
+						{
+							token: 'relative_uri'
+						}
+					]
+				}
+			]
+		},
+
+		/**
 		 * name: general-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
 		 */
