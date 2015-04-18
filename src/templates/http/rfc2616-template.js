@@ -1332,7 +1332,7 @@ module.exports = (function () {
 				{
 					$and: [
 						{
-							token: 'transfer-extension'
+							token: 'transfer_extension'
 						},
 						{
 							token: 'accept-params',
@@ -1774,7 +1774,7 @@ module.exports = (function () {
 				},
 				{
 					token: 'pragma-directive',
-					quantifier: '#'
+					quantifier: '1#'
 				}
 			]
 		},
@@ -1837,7 +1837,105 @@ module.exports = (function () {
 				},
 				{
 					token: 'field-name',
-					quantifier: '#'
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
+		 * name: Transfer-Encoding
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.41
+		 */
+		transfer_encoding: {
+			$and: [
+				{
+					literal: 'Transfer-Encoding'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'transfer-coding',
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
+		 * name: transfer-coding
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.6
+		 */
+		transfer_coding: {
+			$or: [
+				{
+					literal: 'chunked'
+				},
+				{
+					token: 'transfer-extension'
+				}
+			]
+		},
+
+		/**
+		 * name: transfer-extension
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.6
+		 */
+		transfer_extension: {
+			$and: [
+				{
+					token: 'token'
+				},
+				{
+					$and: [
+						{
+							literal: ';'
+						},
+						{
+							token: 'parameter'
+						}
+					],
+					quantifier: '*'
+				}
+			]
+		},
+
+		/**
+		 * name: parameter
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.6
+		 */
+		parameter: {
+			$and: [
+				{
+					token: 'attribute'
+				},
+				{
+					literal: '='
+				},
+				{
+					token: 'value'
+				}
+			]
+		},
+
+		/**
+		 * name: attribute
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.6
+		 */
+		attribute: {
+			token: 'token'
+		},
+
+		/**
+		 * name: value
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.6
+		 */
+		value: {
+			$or: [
+				{
+					token: 'token'
+				},
+				{
+					token: 'quoted-string'
 				}
 			]
 		},
