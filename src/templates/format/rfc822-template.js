@@ -513,7 +513,7 @@ module.exports = (function () {
 							token: 'dtext'
 						},
 						{
-							token: 'quoted-pair'
+							token: 'quoted_pair'
 						}
 					],
 					quantifier: '*'
