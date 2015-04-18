@@ -137,35 +137,35 @@ module.exports = (function () {
 					token: 'if_match'
 				},
 				{
-					literal: 'If-Modified-Since'
+					token: 'if_modified_since'
 				},
 				{
-					literal: 'If-None-Match'
+					token: 'if_none_match'
 				},
 				{
-					literal: 'If-Range'
+					token: 'if_range'
 				},
 				{
-					literal: 'If-Unmodified-Since'
+					token: 'if_unmodified_since'
 				},
 				{
-					literal: 'Max-Forwards'
+					token: 'max_forwards'
 				},
 				{
-					literal: 'Proxy-Authorization'
+					token: 'proxy_authorization'
 				},
 				{
-					literal: 'Range'
+					token: 'range'
 				},
 				{
 					// Sometimes "Refferer" depending on implementation
-					literal: 'Referer'
+					token: 'referer'
 				},
 				{
-					literal: 'TE'
+					token: 'te'
 				},
 				{
-					literal: 'User-Agent'
+					token: 'user_agent'
 				}
 			]
 		},
@@ -367,7 +367,7 @@ module.exports = (function () {
 		 * name: sub-type
 		 * ref: https://tools.ietf.org/html/rfc2616#section-3.9
 		 */
-		sub_type: {
+		subtype: {
 			// TODO: Replace this by a list of valid MIME sub-types
 			token: 'token'
 		},
