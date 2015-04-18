@@ -581,6 +581,126 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Expect
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.20
+		 */
+		expect: {
+			$and: [
+				{
+					literal: 'Expect'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'expectation',
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
+		 * name: From
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.22
+		 */
+		from: {
+			$and: [
+				{
+					literal: 'From'
+				},
+				{
+					literal: ':'
+				},
+				{
+					// TODO: Define the mailbox token and try to merge it with the rfc3986 URI definition
+					token: 'mailbox'
+				}
+			]
+		},
+
+		/**
+		 * name: expectation
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.20
+		 */
+		expectation: {
+			$or: [
+				{
+					literal: '100-continue'
+				},
+				{
+					token: 'expectation_extension'
+				}
+			]
+		},
+
+		/**
+		 * name: expectation-extension
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.20
+		 */
+		expectation_extension: {
+			$and: [
+				{
+					token: 'token'
+				},
+				{
+					$and: [
+						{
+							literal: '='
+						},
+						{
+							$or: [
+								{
+									token: 'token'
+								},
+								{
+									token: 'quoted_string'
+								}
+							]
+						},
+						{
+							token: 'expect_params',
+							quantifier: '*'
+						}
+					],
+					quantifier: '?'
+				}
+			]
+		},
+
+		/**
+		 * name: expect-params
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.20
+		 */
+		expect_params: {
+			$and: [
+				{
+					literal: ';'
+				},
+				{
+					token: 'token'
+				},
+				{
+					$and: [
+						{
+							literal: '='
+						},
+						{
+							$or: [
+								{
+									token: 'token'
+								},
+								{
+									token: 'quoted_string'
+								}
+							]
+						}
+					],
+					quantifier: '?'
+				}
+			]
+		},
+
+		/**
 		 * name: general-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
 		 */
