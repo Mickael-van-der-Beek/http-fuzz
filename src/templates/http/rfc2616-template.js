@@ -1443,31 +1443,31 @@ module.exports = (function () {
 		general_header: {
 			$or: [
 				{
-					token: 'Cache-Control'
+					token: 'cache_control'
 				},
 				{
-					literal: 'Connection'
+					token: 'connection'
 				},
 				{
-					literal: 'Date'
+					token: 'date'
 				},
 				{
-					literal: 'Pragma'
+					token: 'pragma'
 				},
 				{
-					literal: 'Trailer'
+					token: 'trailer'
 				},
 				{
-					literal: 'Transfer-Encoding'
+					token: 'transfer_encoding'
 				},
 				{
-					literal: 'Upgrade'
+					token: 'upgrade'
 				},
 				{
-					literal: 'Via'
+					token: 'via'
 				},
 				{
-					literal: 'Warning'
+					token: 'warning'
 				}
 			]
 		},
@@ -2237,6 +2237,26 @@ module.exports = (function () {
 				}
 			]
 		},
+
+		/**
+		 * name: Allow
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.7
+		 */
+		allow: {
+			$and: [
+				{
+					literal: 'Allow'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'method',
+					quantifier: '#'
+				}
+			]
+		},
+
 
 		/**
 		 * name: extension-header
