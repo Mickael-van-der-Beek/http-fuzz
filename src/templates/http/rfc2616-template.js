@@ -106,75 +106,64 @@ module.exports = (function () {
 		 * ref: https://tools.ietf.org/html/rfc2616#section-5.3
 		 */
 		request_header: {
-			$and: [
+			$or: [
 				{
-					$or: [
-						{
-							literal: 'Accept'
-						},
-						{
-							literal: 'Accept-Charset'
-						},
-						{
-							literal: 'Accept-Encoding'
-						},
-						{
-							literal: 'Accept-Language'
-						},
-						{
-							literal: 'Authorization'
-						},
-						{
-							literal: 'Expect'
-						},
-						{
-							literal: 'From'
-						},
-						{
-							literal: 'Host'
-						},
-						{
-							literal: 'If-Match'
-						},
-						{
-							literal: 'If-Modified-Since'
-						},
-						{
-							literal: 'If-None-Match'
-						},
-						{
-							literal: 'If-Range'
-						},
-						{
-							literal: 'If-Unmodified-Since'
-						},
-						{
-							literal: 'Max-Forwards'
-						},
-						{
-							literal: 'Proxy-Authorization'
-						},
-						{
-							literal: 'Range'
-						},
-						{
-							// Sometimes "Refferer" depending on implementation
-							literal: 'Referer'
-						},
-						{
-							literal: 'TE'
-						},
-						{
-							literal: 'User-Agent'
-						}
-					]
+					token: 'accept'
 				},
 				{
-					literal: ':'
+					token: 'accept_charset'
 				},
 				{
-					token: 'field_value',
-					quantifier: '?'
+					token: 'accept_encoding'
+				},
+				{
+					token: 'accept_language'
+				},
+				{
+					literal: 'Authorization'
+				},
+				{
+					literal: 'Expect'
+				},
+				{
+					literal: 'From'
+				},
+				{
+					literal: 'Host'
+				},
+				{
+					literal: 'If-Match'
+				},
+				{
+					literal: 'If-Modified-Since'
+				},
+				{
+					literal: 'If-None-Match'
+				},
+				{
+					literal: 'If-Range'
+				},
+				{
+					literal: 'If-Unmodified-Since'
+				},
+				{
+					literal: 'Max-Forwards'
+				},
+				{
+					literal: 'Proxy-Authorization'
+				},
+				{
+					literal: 'Range'
+				},
+				{
+					// Sometimes "Refferer" depending on implementation
+					literal: 'Referer'
+				},
+				{
+					literal: 'TE'
+				},
+				{
+					literal: 'User-Agent'
 				}
 			]
 		},
@@ -379,6 +368,197 @@ module.exports = (function () {
 		sub_type: {
 			// TODO: Replace this by a list of valid MIME sub-types
 			token: 'token'
+		},
+
+		/**
+		 * name: accept-charset
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.2
+		 */
+		accept_charset: {
+			$and: [
+				{
+					literal: 'Accept-Charset'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$and: [
+						{
+							$or: [
+								{
+									token: 'charset'
+								},
+								{
+									literal: '*'
+								}
+							]
+						},
+						{
+							$and: [
+								{
+									literal: ';'
+								},
+								{
+									literal: 'q'
+								},
+								{
+									literal: '='
+								},
+								{
+									token: 'qvalue'
+								}
+							],
+							quantifier: '?'
+						}
+					],
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
+		 * name: charset
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.2
+		 */
+		charset: {
+			token: 'token'
+		},
+
+		/**
+		 * name: accept-encoding
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.3
+		 */
+		accept_encoding: {
+			$and: [
+				{
+					literal: 'Accept-Encoding'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$and: [
+						{
+							token: 'codings'
+						},
+						{
+							$and: [
+								{
+									literal: ';'
+								},
+								{
+									literal: 'q'
+								},
+								{
+									literal: '='
+								},
+								{
+									token: 'qvalue'
+								}
+							],
+							quantifier: '?'
+						}
+					],
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
+		 * name: codings
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.3
+		 */
+		codings: {
+			$and: [
+				{
+					token: 'content_coding'
+				},
+				{
+					literal: '*'
+				}
+			]
+		},
+
+		/**
+		 * name: content_coding
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.5
+		 */
+		content_coding: {
+			// TODO: Replace this by a list of valid encoding methods like gzip and deflate
+			token: 'token'
+		},
+
+		/**
+		 * name: accept-language
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.4
+		 */
+		accept_language: {
+			$and: [
+				{
+					literal: 'Accept-Language'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$and: [
+						{
+							token: 'language_range'
+						},
+						{
+							$and: [
+								{
+									literal: ';'
+								},
+								{
+									literal: 'q'
+								},
+								{
+									literal: '='
+								},
+								{
+									token: 'qvalue'
+								}
+							],
+							quantifier: '?'
+						}
+					],
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
+		 * name: language-range
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.4
+		 */
+		language_range: {
+			$or: [
+				{
+					$and: [
+						{
+							token: 'ALPHA',
+							quantifier: '1*8'
+						},
+						{
+							$and: [
+								{
+									literal: '-'
+								},
+								{
+									token: 'ALPHA',
+									quantifier: '1*8'
+								}
+							],
+							quantifier: '*'
+						}
+					]
+				},
+				{
+					literal: '*'
+				}
+			]
 		},
 
 		/**
