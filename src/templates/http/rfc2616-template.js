@@ -1,12 +1,13 @@
 var RFC822FormatTemplate = require('../format/rfc822-template');
 var RFC3986UriTemplate = require('../uri/rfc3986-template');
+var RFC2617HttpTemplate = require('./rfc2617-template');
 
 var _ = require('underscore');
 
 module.exports = (function () {
 	'use strict';
 
-	return _.extend(RFC822FormatTemplate, RFC3986UriTemplate, {
+	return _.extend(RFC822FormatTemplate, RFC3986UriTemplate, RFC2617HttpTemplate, {
 
 		/**
 		 * name: Request
@@ -120,7 +121,7 @@ module.exports = (function () {
 					token: 'accept_language'
 				},
 				{
-					literal: 'Authorization'
+					token: 'Authorization'
 				},
 				{
 					literal: 'Expect'
@@ -371,7 +372,7 @@ module.exports = (function () {
 		},
 
 		/**
-		 * name: accept-charset
+		 * name: Accept-Charset
 		 * ref: https://tools.ietf.org/html/rfc2616#section-14.2
 		 */
 		accept_charset: {
@@ -426,7 +427,7 @@ module.exports = (function () {
 		},
 
 		/**
-		 * name: accept-encoding
+		 * name: Accept-Encoding
 		 * ref: https://tools.ietf.org/html/rfc2616#section-14.3
 		 */
 		accept_encoding: {
@@ -490,7 +491,7 @@ module.exports = (function () {
 		},
 
 		/**
-		 * name: accept-language
+		 * name: Accept-Language
 		 * ref: https://tools.ietf.org/html/rfc2616#section-14.4
 		 */
 		accept_language: {
@@ -557,6 +558,24 @@ module.exports = (function () {
 				},
 				{
 					literal: '*'
+				}
+			]
+		},
+
+		/**
+		 * name: Authorization
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.8
+		 */
+		authorization: {
+			$and: [
+				{
+					literal: 'Authorization'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'credentials'
 				}
 			]
 		},
