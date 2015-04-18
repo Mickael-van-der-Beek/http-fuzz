@@ -1743,6 +1743,24 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Date
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.18
+		 */
+		date: {
+			$and: [
+				{
+					literal: 'Date'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'http_date'
+				}
+			]
+		},
+
+		/**
 		 * name: entity-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
