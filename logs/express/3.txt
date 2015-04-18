@@ -29,3 +29,18 @@ Connection: keep-alive
 Cannot POST Q://$%bc@231.149.251.212:5%FC%16?
 
 --------------------------------------------------------------------------------
+
+DELETE c://@8.7.206.9:33 HTTP/9.41
+
+
+++++++++++++++++++++++++++++++++++++++++
+HTTP/1.1 404 Not Found
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Content-Length: 32
+Date: Sat, 18 Apr 2015 23:19:12 GMT
+Connection: keep-alive
+
+Cannot DELETE c://@8.7.206.9:33
+
+--------------------------------------------------------------------------------

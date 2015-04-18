@@ -52,3 +52,25 @@ Connection: keep-alive
     at /Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:270:7
     at Function.proto.process_params (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:321:12)
     at next (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:261:10)</pre></div></div><div class="footer"><div class="container"><span class="copyright pull-right">&#169; 2015 Acme, Inc.</span><ul class="links"><li><a href="/">Home</a></li><li><a href="/contact/">Contact</a></li></ul><div class="clearfix"></div></div></div><div class="ajax-spinner"><img src="/media/ajax-pulse.gif"></div><!--if lte IE 9script(src='/layouts/ie-sucks.min.js?br34k-01')--><script src="/layouts/core.min.js?br34k-01"></script></body></html
+
+--------------------------------------------------------------------------------
+TRACE v://%fE/3: HTTP/260.74
+Via:_/m(u/n(F/(H/p(2/u(0/(*/())/
+                                (z/!(3/u(n/(#/|(
+                                                /X()o/|(D//(    /#()h/(l/s())):/g(/}())))   /(q/(?/())C/((/&(n/B(a/())))))) /   (r/r()))))))-/<(*/()
+                                                                                                                                                            /r()))/p(W/8(/P(D/(o/s([/X()(z/(}/(/(h/%()))/(H/U(/ ()
+          //"(/>(h/r(x/$(</.(t/()) /f())))/K()))))/
+                                                   ()))));/y())))5/()))
+
+
+++++++++++++++++++++++++++++++++++++++++
+HTTP/1.1 400 Bad Request
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Content-Length: 1145
+Date: Sat, 18 Apr 2015 23:16:27 GMT
+Connection: keep-alive
+
+TypeError: Failed to decode param &#39;%fE/3:&#39;<br> &nbsp; &nbsp;at decode_param (/Users/kollektiv/node/drywall/node_modules/express/lib/router/layer.js:162:15)<br> &nbsp; &nbsp;at Layer.match (/Users/kollektiv/node/drywall/node_modules/express/lib/router/layer.js:136:11)<br> &nbsp; &nbsp;at matchLayer (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:545:18)<br> &nbsp; &nbsp;at next (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:206:15)<br> &nbsp; &nbsp;at trim_prefix (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:276:45)<br> &nbsp; &nbsp;at /Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:270:7<br> &nbsp; &nbsp;at Function.proto.process_params (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:321:12)<br> &nbsp; &nbsp;at next (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:261:10)<br> &nbsp; &nbsp;at trim_prefix (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:276:45)<br> &nbsp; &nbsp;at /Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:270:7
+
+--------------------------------------------------------------------------------

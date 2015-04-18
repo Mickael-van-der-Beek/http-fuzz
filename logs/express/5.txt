@@ -1,0 +1,3 @@
+ EMPTY: 
+   { request: 'CONNECT %d6&@[vaC2.3:_] HTTP/3578.56\r\n\r\n',
+     response: [] } }
