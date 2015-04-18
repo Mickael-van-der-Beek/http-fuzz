@@ -178,6 +178,11 @@ module.exports = (function () {
 				}
 			]
 		},
+
+		/**
+		 * name: general-header
+		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
+		 */
 		general_header: {
 			$and: [
 				{
@@ -220,6 +225,11 @@ module.exports = (function () {
 				}
 			]
 		},
+
+		/**
+		 * name: entity-header
+		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
+		 */
 		entity_header: {
 			$and: [
 				{
@@ -504,7 +514,9 @@ module.exports = (function () {
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.2
 		 */
 		field_content: {
-			literal: null
+			// The official definition is more complex but this is a temporary placeholder
+			token: 'OCTET',
+			quantifier: '*'
 		},
 
 		/**
