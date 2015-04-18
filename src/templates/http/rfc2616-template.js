@@ -1990,6 +1990,83 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: received-protocol
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.45
+		 */
+		received_protocol: {
+			$and: [
+				{
+					$and: [
+						{
+							token: 'protocol-name'
+						},
+						{
+							literal: '/'
+						}
+					],
+					quantifier: '?'
+				},
+				{
+					token: 'protocol-version'
+				}
+			]
+		},
+
+		/**
+		 * name: protocol-name
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.45
+		 */
+		protocol_name: {
+			token: 'token'
+		},
+
+		/**
+		 * name: protocol-version
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.45
+		 */
+		protocol_version: {
+			token: 'token'
+		},
+
+		/**
+		 * name: received-by
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.45
+		 */
+		received_by: {
+			$or: [
+				{
+					$and: [
+						{
+							token: 'host'
+						},
+						{
+							$and: [
+								{
+									literal: ':'
+								},
+								{
+									token: 'port'
+								}
+							],
+							quantifier: '?'
+						}
+					]
+				},
+				{
+					token: 'pseudonym'
+				}
+			]
+		},
+
+		/**
+		 * name: pseudonym
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.45
+		 */
+		pseudonym: {
+			token: 'token'
+		},
+
+		/**
 		 * name: entity-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
