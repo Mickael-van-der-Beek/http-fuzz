@@ -1220,6 +1220,25 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Max-Forwards
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.31
+		 */
+		max_forwards: {
+			$and: [
+				{
+					literal: 'Max-Forwards'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'DIGIT',
+					quantifier: '1*'
+				}
+			]
+		},
+
+		/**
 		 * name: general-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
 		 */
