@@ -1,12 +1,16 @@
-var SyntaxTemplate = require('./syntax-template');
+var RFC822FormatTemplate = require('../format/rfc822-template');
 
 var _ = require('underscore');
 
 module.exports = (function () {
 	'use strict';
 
-	return _.extend(SyntaxTemplate, {
+	return _.extend(RFC822FormatTemplate, {
 
+		/**
+		 * name: Request
+		 * ref: https://tools.ietf.org/html/rfc2616#section-5
+		 */
 		request: {
 			$and: [
 				{
@@ -43,6 +47,10 @@ module.exports = (function () {
 			]
 		},
 
+		/**
+		 * name: Request-Line
+		 * ref: https://tools.ietf.org/html/rfc2616#section-5.1
+		 */
 		request_line: {
 			$and: [
 				{
@@ -66,6 +74,10 @@ module.exports = (function () {
 			]
 		},
 
+		/**
+		 * name: Request-URI
+		 * ref: https://tools.ietf.org/html/rfc2616#section-5.1.2
+		 */
 		request_uri: {
 			$or: [
 				{
@@ -75,7 +87,12 @@ module.exports = (function () {
 					token: 'absolute_uri'
 				},
 				{
-					token: 'abs_path'
+					/**
+					 * Spec says name is: abs_path
+					 * but: http://tools.ietf.org/html/rfc3986#appendix-D.2
+					 * overrides it with a new name: path-absolute
+					 */
+					token: 'path_absolute'
 				},
 				{
 					token: 'authority'
@@ -83,6 +100,10 @@ module.exports = (function () {
 			]
 		},
 
+		/**
+		 * name: request-header
+		 * ref: https://tools.ietf.org/html/rfc2616#section-5.3
+		 */
 		request_header: {
 			$and: [
 				{
@@ -247,10 +268,18 @@ module.exports = (function () {
 			]
 		},
 
+		/**
+		 * name: extension-header
+		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
+		 */
 		extension_header: {
 			token: 'message_header'
 		},
 
+		/**
+		 * name: message-header
+		 * ref: https://tools.ietf.org/html/rfc2616#section-4.2
+		 */
 		message_header: {
 			$and: [
 				{
@@ -266,10 +295,18 @@ module.exports = (function () {
 			]
 		},
 
+		/**
+		 * name: field-name
+		 * ref: https://tools.ietf.org/html/rfc2616#section-4.2
+		 */
 		field_name: {
 			token: 'token'
 		},
 
+		/**
+		 * name: field-value
+		 * ref: https://tools.ietf.org/html/rfc2616#section-4.2
+		 */
 		field_value: {
 			$or: [
 				{
@@ -282,6 +319,10 @@ module.exports = (function () {
 			quantifier: '*'
 		},
 
+		/**
+		 * name: method
+		 * ref: https://tools.ietf.org/html/rfc2616#section-5.1.1
+		 */
 		method: {
 			// Missing WebDAV methods as well as DEBUG and TRACK
 			$or: [
@@ -315,10 +356,18 @@ module.exports = (function () {
 			]
 		},
 
+		/**
+		 * name: extension-method
+		 * ref: https://tools.ietf.org/html/rfc2616#section-5.1.1
+		 */
 		extension_method: {
 			token: 'token'
 		},
 
+		/**
+		 * name: HTTP-Version
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.1
+		 */
 		http_version: {
 			$and: [
 				{
@@ -341,27 +390,128 @@ module.exports = (function () {
 			]
 		},
 
-		field_content: {
-			literal: null
-		},
-		message_body: {
-			literal: null
-		},
-
-		absolute_uri: {
-			literal: null
-		},
-		abs_path: {
-			literal: null
-		},
-		authority: {
-			literal: null
-		},
-
+		/**
+		 * name: token
+		 * ref: https://tools.ietf.org/html/rfc2616#section-2.2
+		 */
 		token: {
 			// any CHAR except CTLs or separators
 			token: 'CHAR',
 			quantifier: '+'
+		},
+
+		/**
+		 * name: LWS
+		 * ref: https://tools.ietf.org/html/rfc2616#section-2.2
+		 */
+		LWS: {
+			$and: [
+				{
+					token: 'CRLF',
+					quantifier: '?'
+				},
+				{
+					$and: [
+						{
+							token: 'SP'
+						},
+						{
+							token: 'HT'
+						}
+					],
+					quantifier: '+'
+				}
+			]
+		},
+
+		/**
+		 * name: SP
+		 * ref: https://tools.ietf.org/html/rfc2616#section-2.2
+		 */
+		SP: {
+			literal: ' '
+		},
+
+		/**
+		 * name: separators
+		 * ref: https://tools.ietf.org/html/rfc2616#section-2.2
+		 */
+		separators: {
+			$or: [
+				{
+					literal: '('
+				},
+				{
+					literal: ')'
+				},
+				{
+					literal: '<'
+				},
+				{
+					literal: '>'
+				},
+				{
+					literal: '@'
+				},
+				{
+					literal: ','
+				},
+				{
+					literal: ';'
+				},
+				{
+					literal: ':'
+				},
+				{
+					literal: '\\'
+				},
+				{
+					literal: '"'
+				},
+				{
+					literal: '/'
+				},
+				{
+					literal: '['
+				},
+				{
+					literal: ']'
+				},
+				{
+					literal: '?'
+				},
+				{
+					literal: '='
+				},
+				{
+					literal: '{'
+				},
+				{
+					literal: '}'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'HT'
+				}
+			]
+		},
+
+		/**
+		 * name: field-content
+		 * ref: https://tools.ietf.org/html/rfc2616#section-4.2
+		 */
+		field_content: {
+			literal: null
+		},
+
+		/**
+		 * name: message-body
+		 * ref: https://tools.ietf.org/html/rfc2616#section-4.3
+		 */
+		message_body: {
+			literal: null
 		}
 
 	});
