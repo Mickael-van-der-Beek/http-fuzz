@@ -1824,6 +1824,25 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Trailer
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.40
+		 */
+		trailer: {
+			$and: [
+				{
+					literal: 'Trailer'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'field-name',
+					quantifier: '#'
+				}
+			]
+		},
+
+		/**
 		 * name: entity-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
