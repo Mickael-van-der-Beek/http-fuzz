@@ -1152,7 +1152,7 @@ module.exports = (function () {
 
 		/**
 		 * name: If-None-Match
-		 * ref: https://tools.ietf.org/html/rfc2616#section-14.25
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.26
 		 */
 		if_none_match: {
 			$and: [
@@ -1172,6 +1172,49 @@ module.exports = (function () {
 							quantifier: '1#'
 						}
 					]
+				}
+			]
+		},
+
+		/**
+		 * name: If-Range
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.27
+		 */
+		if_range: {
+			$and: [
+				{
+					literal: 'If-Range'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$or: [
+						{
+							token: 'entity-tag'
+						},
+						{
+							token: 'http-date'
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: If-Unmodified-Since
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.28
+		 */
+		if_unmodified_since: {
+			$and: [
+				{
+					literal: 'If-Unmodified-Since'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'http-date'
 				}
 			]
 		},
