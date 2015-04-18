@@ -1151,6 +1151,32 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: If-None-Match
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.25
+		 */
+		if_none_match: {
+			$and: [
+				{
+					literal: 'If-None-Match'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$or: [
+						{
+							literal: '*'
+						},
+						{
+							token: 'entity-tag',
+							quantifier: '1#'
+						}
+					]
+				}
+			]
+		},
+
+		/**
 		 * name: general-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
 		 */
