@@ -124,16 +124,16 @@ module.exports = (function () {
 					token: 'Authorization'
 				},
 				{
-					literal: 'Expect'
+					token: 'expect'
 				},
 				{
-					literal: 'From'
+					token: 'from'
 				},
 				{
-					literal: 'Host'
+					token: 'host_header'
 				},
 				{
-					literal: 'If-Match'
+					token: 'if_match'
 				},
 				{
 					literal: 'If-Modified-Since'
@@ -697,6 +697,106 @@ module.exports = (function () {
 					quantifier: '?'
 				}
 			]
+		},
+
+		/**
+		 * name: Host
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.23
+		 *
+		 * notes: Key was renamed from "host" to "host_header" to prevent a
+		 * collision with the RFC3986 URI spec
+		 */
+		host_header: {
+			$and: [
+				{
+					literal: 'Host'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$and: [
+						{
+							token: 'host'
+						},
+						{
+							$or: [
+								{
+									literal: ':'
+								},
+								{
+									token: 'port'
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: If-Match
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.24
+		 */
+		if_match: {
+			$and: [
+				{
+					literal: 'If-Match'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$or: [
+						{
+							literal: '*'
+						},
+						{
+							token: 'entity_tag',
+							quantifier: '1#'
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: entity-tag
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.11
+		 */
+		entity_tag: {
+			$and: [
+				{
+					token: 'weak',
+					quantifier: '?'
+				},
+				{
+					token: 'opaque-tag'
+				}
+			]
+		},
+
+		/**
+		 * name: weak
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.11
+		 */
+		weak: {
+			$and: [
+				{
+					literal: 'W'
+				},
+				{
+					literal: '/'
+				}
+			]
+		},
+
+		/**
+		 * name: opaque-tag
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.11
+		 */
+		opaque_tag: {
+			token: 'quoted-string'
 		},
 
 		/**
