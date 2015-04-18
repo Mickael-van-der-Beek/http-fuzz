@@ -2356,6 +2356,31 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Content-Location
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.14
+		 */
+		content_location: {
+			$and: [
+				{
+					literal: 'Content-Location'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$or: [
+						{
+							token: 'absolute_uri'
+						},
+						{
+							token: 'relative_uri'
+						}
+					]
+				}
+			]
+		},
+
+		/**
 		 * name: extension-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
