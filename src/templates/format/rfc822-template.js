@@ -304,13 +304,99 @@ module.exports = (function () {
 
 		/**
 		 * name: mailbox
-		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
+		 * ref: https://tools.ietf.org/html/rfc822#section-6
 		 * notes: TODO
 		 */
 		mailbox: {
 			// TODO: Define the mailbox token and try to merge it with the rfc3986 URI definition
-			literal: null
-		}
+			$or: [
+				{
+					token: 'addr-spec'
+				},
+				{
+					$and: [
+						{
+							token: 'phrase',
+							// RFC1123 says phrase is not optional
+							quantifier: '?'
+						},
+						{
+							token: 'route-addr'
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: addr-spec
+		 * ref: https://tools.ietf.org/html/rfc822#section-6
+		 */
+		addr_spec: 	{
+			$and: [
+				{
+					token: 'local-part'
+				},
+				{
+					literal: '@'
+				},
+				{
+					token: 'domain'
+				}
+			]
+		},
+
+		/**
+		 * name: local-part
+		 * ref: https://tools.ietf.org/html/rfc822#section-6
+		 */
+		local_part: {
+			$and: [
+				{
+					token: 'word'
+				},
+				{
+					$and: [
+						{
+							literal: '.'
+						},
+						{
+							token: 'word'
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: word
+		 * ref: https://tools.ietf.org/html/rfc822#section-6
+		 */
+		word: {
+			$or: [
+				{
+					token: 'atom'
+				},
+				{
+					token: 'quoted-string'
+				}
+			]
+		},
+
+		/**
+		 * name: domain
+		 * ref: https://tools.ietf.org/html/rfc822#section-6
+		 */
+		domain: {
+			$or: [
+				{
+					token: 'atom'
+				},
+				{
+					token: 'quoted-string'
+				}
+			]
+		},
 
 	};
 })();
