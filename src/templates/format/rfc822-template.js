@@ -221,6 +221,15 @@ module.exports = (function () {
 					token: 'CHAR'
 				}
 			]
+		},
+
+		/**
+		 * name: mailbox
+		 * ref: https://tools.ietf.org/html/rfc822#section-6.1
+		 */
+		mailbox: {
+			// TODO: Define the mailbox token and try to merge it with the rfc3986 URI definition
+			literal: null
 		}
 
 	};

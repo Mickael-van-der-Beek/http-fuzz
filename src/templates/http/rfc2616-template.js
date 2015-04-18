@@ -612,7 +612,6 @@ module.exports = (function () {
 					literal: ':'
 				},
 				{
-					// TODO: Define the mailbox token and try to merge it with the rfc3986 URI definition
 					token: 'mailbox'
 				}
 			]
