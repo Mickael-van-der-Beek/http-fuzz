@@ -101,22 +101,31 @@ module.exports = (function () {
 		var quantifier = mainToken.quantifier;
 		var range = null;
 
-		switch (quantifier) {
-			case '*':
-				range = this.starOperatorRange;
-				break;
-			case '+':
-				range = this.plusOperatorRange;
-				break;
-			case '?':
-				range = this.optionalOperatorRange;
-				break;
-			default:
-				range = [
-					1,
-					1
-				];
-				break;
+		var nquantifier = null;
+		if (!isNaN(nquantifier = Number(quantifier))) {
+			range = [
+				nquantifier,
+				nquantifier
+			];
+		}
+		else {
+			switch (quantifier) {
+				case '*':
+					range = this.starOperatorRange;
+					break;
+				case '+':
+					range = this.plusOperatorRange;
+					break;
+				case '?':
+					range = this.optionalOperatorRange;
+					break;
+				default:
+					range = [
+						1,
+						1
+					];
+					break;
+			}
 		}
 
 		return Util.getRandomInt(range[0], range[1]);
