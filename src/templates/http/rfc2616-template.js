@@ -2535,6 +2535,24 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Last-Modified
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.29
+		 */
+		last_modified: {
+			$and: [
+				{
+					literal: 'Last-Modified'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'http_date'
+				}
+			]
+		},
+
+		/**
 		 * name: extension-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
