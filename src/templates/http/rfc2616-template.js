@@ -122,7 +122,7 @@ module.exports = (function () {
 					token: 'accept_language'
 				},
 				{
-					token: 'Authorization'
+					token: 'authorization'
 				},
 				{
 					token: 'expect'
