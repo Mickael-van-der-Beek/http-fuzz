@@ -1761,6 +1761,69 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Pragma
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.32
+		 */
+		pragma: {
+			$and: [
+				{
+					literal: 'Pragma'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'pragma-directive',
+					quantifier: '#'
+				}
+			]
+		},
+
+		/**
+		 * name: pragma-directive
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.32
+		 */
+		pragma_directive: {
+			$or: [
+				{
+					literal: 'no-cache'
+				},
+				{
+					token: 'extension-pragma'
+				}
+			]
+		},
+
+		/**
+		 * name: extension-pragma
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.32
+		 */
+		extension_pragma: {
+			$and: [
+				{
+					token: 'token'
+				},
+				{
+					$and: [
+						{
+							literal: '='
+						},
+						{
+							$or: [
+								{
+									token: 'token'
+								},
+								{
+									token: 'quoted-string'
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+
+		/**
 		 * name: entity-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
