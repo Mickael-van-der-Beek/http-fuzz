@@ -1,0 +1,26 @@
+--------------------------------------------------------------------------------
+GET ):6 HTTP/9.6
+
+a�
+++++++++++++++++++++++++++++++++++++++++
+HTTP/1.1 400 Bad Request
+Content-Type: text/html; charset=us-ascii
+Date: Sat, 18 Apr 2015 18:26:05 GMT
+Content-Length: 324
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd">
+<HTML><HEAD><TITLE>Bad Request</TITLE>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=us-ascii"></HEAD>
+<BODY><h2>Bad Request - Invalid URL</h2>
+<hr><p>HTTP Error 400. The request URL is invalid.</p>
+</BODY></HTML>
+HTTP/1.0 400 Bad request
+Cache-Control: no-cache
+Connection: close
+Content-Type: text/html
+
+<html><body><h1>400 Bad request</h1>
+Your browser sent an invalid request.
+</body></html>
+
+--------------------------------------------------------------------------------

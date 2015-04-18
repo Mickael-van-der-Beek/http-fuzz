@@ -10,6 +10,7 @@
 ### Logs ###
 logs/*
 !logs/express
+!logs/stackoverflow
 *.log
 
 ### Runtime data ###

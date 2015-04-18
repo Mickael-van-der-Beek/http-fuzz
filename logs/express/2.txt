@@ -1,0 +1,12 @@
+TypeError: Failed to decode param '/:1%ce'
+    at decode_param (/Users/kollektiv/node/drywall/node_modules/express/lib/router/layer.js:162:15)
+    at Layer.match (/Users/kollektiv/node/drywall/node_modules/express/lib/router/layer.js:136:11)
+    at matchLayer (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:545:18)
+    at next (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:206:15)
+    at app.locals.projectName (/Users/kollektiv/node/drywall/app.js:67:3)
+    at Layer.handle [as handle_request] (/Users/kollektiv/node/drywall/node_modules/express/lib/router/layer.js:82:5)
+    at trim_prefix (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:302:13)
+    at /Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:270:7
+    at Function.proto.process_params (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:321:12)
+    at next (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:261:10)
+OPTIONS r://1.9.203.6:1:%ce 500 19.795 ms - 2590
