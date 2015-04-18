@@ -2277,6 +2277,66 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Content-Language
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.11
+		 */
+		content_language: {
+			$and: [
+				{
+					literal: 'Content-Language'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'language_tag',
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
+		 * name: language-tag
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.10
+		 */
+		language_tag: {
+			$and: [
+				{
+					token: 'primary-tag'
+				},
+				{
+					$and: [
+						{
+							literal: '-'
+						},
+						{
+							token: 'subtag'
+						}
+					],
+					quantifier: '*'
+				}
+			]
+		},
+
+		/**
+		 * name: primary-tag
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.10
+		 */
+		primary_tag: {
+			token: 'ALPHA',
+			quantifier: '1*8'
+		},
+
+		/**
+		 * name: sub-tag
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.10
+		 */
+		subtag: {
+			token: 'ALPHA',
+			quantifier: '1*8'
+		},
+
+		/**
 		 * name: extension-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
