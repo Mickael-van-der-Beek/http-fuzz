@@ -2517,6 +2517,24 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Expires
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.21
+		 */
+		expires: {
+			$and: [
+				{
+					literal: 'Expires'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'http_date'
+				}
+			]
+		},
+
+		/**
 		 * name: extension-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
