@@ -1716,6 +1716,33 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Connection
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.10
+		 */
+		connection: {
+			$and: [
+				{
+					literal: 'Connection'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'connection-token',
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
+		 * name: connection-token
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.10
+		 */
+		connection_token: {
+			token: 'token'
+		},
+
+		/**
 		 * name: entity-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
