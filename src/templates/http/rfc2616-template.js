@@ -2408,6 +2408,97 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Content-Range
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.16
+		 */
+		content_range: {
+			$and: [
+				{
+					literal: 'Content-Range'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'content_range_spec'
+				}
+			]
+		},
+
+		/**
+		 * name: content-range-spec
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.15
+		 */
+		content_range_spec: {
+			token: 'byte_content_range_spec'
+		},
+
+		/**
+		 * name: byte-content-range-spec
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.15
+		 */
+		byte_content_range_spec: {
+			$and: [
+				{
+					token: 'bytes_unit'
+				},
+				{
+					token: 'SP'
+				},
+				{
+					token: 'byte_range_resp_spec'
+				},
+				{
+					literal: '/'
+				},
+				{
+					$or: [
+						{
+							token: 'instance_length'
+						},
+						{
+							literal: '*'
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: byte-range-resp-spec
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.15
+		 */
+		byte_range_resp_spec: {
+			$or: [
+				{
+					$and: [
+						{
+							token: 'first_byte_pos'
+						},
+						{
+							literal: '-'
+						},
+						{
+							token: 'last_byte_pos'
+						}
+					]
+				},
+				{
+					literal: '*'
+				}
+			]
+		},
+
+		/**
+		 * name: instance-length
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.15
+		 */
+		instance_length: {
+			literal: 'DIGIT',
+			quantifier: '1*'
+		},
+
+		/**
 		 * name: extension-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
