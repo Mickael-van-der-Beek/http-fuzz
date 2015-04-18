@@ -121,6 +121,106 @@ module.exports = (function () {
 						literal: String.fromCharCode(index)
 					};
 				})
+		},
+
+		/**
+		 * name: quoted-string
+		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
+		 */
+		quoted_string: {
+			$and: [
+				{
+					literal: '"'
+				},
+				{
+					$or: [
+						{
+							token: 'qtext'
+						},
+						{
+							token: 'quoted_pair'
+						}
+					]
+				},
+				{
+					literal: '"'
+				}
+			]
+		},
+
+		/**
+		 * name: qtext
+		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
+		 */
+		qtext: {
+			$or: []
+				.concat(
+					Array.apply(
+						null,
+						new Array(128)
+					)
+					.reduce(function (qtext, item, index) {
+						var chr = String.fromCharCode(index);
+
+						if (chr !== '"' && chr !== '\\' && chr !== '\r') {
+							qtext.push({
+								literal: chr
+							});
+						}
+
+						return qtext;
+					}, []),
+					{
+						token: 'linear_white_space'
+					}
+				)
+		},
+
+		/**
+		 * name: linear-white-space
+		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
+		 */
+		linear_white_space: {
+			$and: [
+				{
+					token: 'CRLF',
+					quantifier: '?'
+				},
+				{
+					token: 'LWSP_char'
+				}
+			],
+			quantifier: '1*'
+		},
+
+		/**
+		 * name: LWSP-char
+		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
+		 */
+		LWSP_char: {
+			$or: [
+				{
+					token: 'SP'
+				},
+				{
+					token: 'HT'
+				}
+			]
+		},
+
+		/**
+		 * name: quoted-pair
+		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
+		 */
+		quoted_pair: {
+			$and: [
+				{
+					literal: '/'
+				},
+				{
+					token: 'CHAR'
+				}
+			]
 		}
 
 	};

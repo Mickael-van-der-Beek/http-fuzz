@@ -180,6 +180,208 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Accept
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.1
+		 */
+		accept: {
+			$and: [
+				{
+					literal: 'Accept'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$and: [
+						{
+							token: 'media_range'
+						},
+						{
+							token: 'accept_params',
+							quantifier: '#'
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: media-range
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.1
+		 */
+		media_range: {
+			$and: [
+				{
+					$or: [
+						{
+							literal: '*/*'
+						},
+						{
+							$and: [
+								{
+									token: 'type'
+								},
+								{
+									literal: '/'
+								},
+								{
+									literal: '*'
+								}
+							]
+						},
+						{
+							$and: [
+								{
+									token: 'type'
+								},
+								{
+									literal: '/'
+								},
+								{
+									token: 'subtype'
+								}
+							]
+						}
+					]
+				},
+				{
+					$and: [
+						{
+							literal: ';'
+						},
+						{
+							token: 'parameter'
+						}
+					],
+					quantifier: '*'
+				}
+			]
+		},
+
+		/**
+		 * name: accept-params
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.1
+		 */
+		accept_params: {
+			$and: [
+				{
+					literal: ';'
+				},
+				{
+					literal: 'q'
+				},
+				{
+					literal: '='
+				},
+				{
+					token: 'qvalue'
+				},
+				{
+					token: 'accept_extension',
+					quantifier: '*'
+				}
+			]
+		},
+
+		/**
+		 * name: accept-extension
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.1
+		 */
+		accept_extension: {
+			$and: [
+				{
+					literal: ';'
+				},
+				{
+					token: 'token'
+				},
+				{
+					$and: [
+						{
+							literal: '='
+						},
+						{
+							$or: [
+								{
+									token: 'token'
+								},
+								{
+									token: 'quoted_string'
+								}
+							]
+						}
+					],
+					quantifier: '?'
+				}
+			]
+		},
+
+		/**
+		 * name: qvalue
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.9
+		 */
+		qvalue: {
+			$or: [
+				{
+					$and: [
+						{
+							literal: '0'
+						},
+						{
+							$and: [
+								{
+									literal: '.'
+								},
+								{
+									token: 'DIGIT',
+									quantifier: '0*3'
+								}
+							],
+							quantifier: '?'
+						}
+					]
+				},
+				{
+					$and: [
+						{
+							literal: '1'
+						},
+						{
+							$and: [
+								{
+									literal: '.'
+								},
+								{
+									literal: '0',
+									quantifier: '0*3'
+								}
+							],
+							quantifier: '?'
+						}
+					]
+				}
+			]
+		},
+
+		/**
+		 * name: type
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.9
+		 */
+		type: {
+			// TODO: Replace this by a list of valid MIME types
+			token: 'token'
+		},
+
+		/**
+		 * name: sub-type
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.9
+		 */
+		sub_type: {
+			// TODO: Replace this by a list of valid MIME sub-types
+			token: 'token'
+		},
+
+		/**
 		 * name: general-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
 		 */
