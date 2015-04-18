@@ -496,7 +496,61 @@ module.exports = (function () {
 						literal: String.fromCharCode(index)
 					};
 				})
-		}
+		},
+
+		/**
+		 * name: domain-literal
+		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
+		 */
+		domain_literal: {
+			$and: [
+				{
+					literal: '['
+				},
+				{
+					$or: [
+						{
+							token: 'dtext'
+						},
+						{
+							token: 'quoted-pair'
+						}
+					],
+					quantifier: '*'
+				},
+				{
+					literal: ']'
+				}
+			]
+		},
+
+		/**
+		 * name: dtext
+		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
+		 */
+		dtext: {
+			$or: []
+				.concat(
+					Array.apply(
+						null,
+						new Array(128)
+					)
+					.reduce(function (dtext, item, index) {
+						var chr = String.fromCharCode(index);
+
+						if (chr !== '[' && chr !== ']' && chr !== '\\' && chr !== '\r') {
+							dtext.push({
+								literal: chr
+							});
+						}
+
+						return dtext;
+					}, []),
+					{
+						token: 'linear_white_space'
+					}
+				)
+		},
 
 	};
 })();
