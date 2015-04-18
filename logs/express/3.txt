@@ -1,0 +1,15 @@
+--------------------------------------------------------------------------------
+DELETE v://%d5+@D/%ea/: HTTP/8.8
+
+
+++++++++++++++++++++++++++++++++++++++++
+HTTP/1.1 404 Not Found
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Content-Length: 31
+Date: Sat, 18 Apr 2015 22:39:58 GMT
+Connection: keep-alive
+
+Cannot DELETE v://%d5+@D/%ea/:
+
+--------------------------------------------------------------------------------
