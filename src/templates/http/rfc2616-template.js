@@ -1960,6 +1960,36 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Via
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.45
+		 */
+		via: {
+			$and: [
+				{
+					literal: 'Via'
+				},
+				{
+					literal: ':'
+				},
+				{
+					$and: [
+						{
+							token: 'received_protocol'
+						},
+						{
+							token: 'received_by'
+						},
+						{
+							token: 'comment',
+							quantifier: '?'
+						}
+					],
+					quantifier: '1#'
+				}
+			]
+		},
+
+		/**
 		 * name: entity-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
