@@ -145,6 +145,47 @@ module.exports = (function () {
 		},
 
 		/**
+		 * notes: This definition is custom since it's not present in the RFC's
+		 */
+		base64: {
+			$or: []
+				.concat(
+					Array.apply(
+						null,
+						new Array(10)
+					)
+					.map(function (item, index) {
+						return {
+							literal: String.fromCharCode(48 + index)
+						};
+					}),
+					Array.apply(
+						null,
+						new Array(26)
+					)
+					.map(function (item, index) {
+						return {
+							literal: String.fromCharCode(65 + index)
+						};
+					}),
+					Array.apply(
+						null,
+						new Array(26)
+					)
+					.map(function (item, index) {
+						return {
+							literal: String.fromCharCode(97 + index)
+						};
+					}),
+					[
+						'+',
+						'/',
+						'='
+					]
+				)
+		},
+
+		/**
 		 * name: CHAR
 		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
 		 */

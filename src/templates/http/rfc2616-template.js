@@ -2381,6 +2381,33 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Content-MD5
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.15
+		 */
+		content_md5: {
+			$and: [
+				{
+					literal: 'Content-MD5'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'md5-digest'
+				}
+			]
+		},
+
+		/**
+		 * name: md5-digest
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.15
+		 */
+		md5_digest: {
+			token: 'base64',
+			quantifier: '24'
+		},
+
+		/**
 		 * name: extension-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
