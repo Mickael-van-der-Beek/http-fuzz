@@ -1,0 +1,47 @@
+TRACE /=:@/:) 500 21.022 ms - 2639
+Error: Bad Request
+    at SendStream.error (/Users/kollektiv/node/drywall/node_modules/serve-static/node_modules/send/index.js:245:16)
+    at SendStream.pipe (/Users/kollektiv/node/drywall/node_modules/serve-static/node_modules/send/index.js:417:32)
+    at serveStatic (/Users/kollektiv/node/drywall/node_modules/serve-static/index.js:111:12)
+    at Layer.handle [as handle_request] (/Users/kollektiv/node/drywall/node_modules/express/lib/router/layer.js:82:5)
+    at trim_prefix (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:302:13)
+    at /Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:270:7
+    at Function.proto.process_params (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:321:12)
+    at next (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:261:10)
+    at compression (/Users/kollektiv/node/drywall/node_modules/compression/index.js:212:5)
+    at Layer.handle [as handle_request] (/Users/kollektiv/node/drywall/node_modules/express/lib/router/layer.js:82:5)
+
+OPTIONS / 404 21.833 ms - 1582
+Error: Bad Request
+    at SendStream.error (/Users/kollektiv/node/drywall/node_modules/serve-static/node_modules/send/index.js:245:16)
+    at SendStream.pipe (/Users/kollektiv/node/drywall/node_modules/serve-static/node_modules/send/index.js:417:32)
+    at serveStatic (/Users/kollektiv/node/drywall/node_modules/serve-static/index.js:111:12)
+    at Layer.handle [as handle_request] (/Users/kollektiv/node/drywall/node_modules/express/lib/router/layer.js:82:5)
+    at trim_prefix (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:302:13)
+    at /Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:270:7
+    at Function.proto.process_params (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:321:12)
+    at next (/Users/kollektiv/node/drywall/node_modules/express/lib/router/index.js:261:10)
+    at compression (/Users/kollektiv/node/drywall/node_modules/compression/index.js:212:5)
+    at Layer.handle [as handle_request] (/Users/kollektiv/node/drywall/node_modules/express/lib/router/layer.js:82:5)
+
+--------------------------------------------------------------------------------
+OPTIONS / HTTP/36.37
+Accept-Language:*;q=1.0
+Content-MD5
+
+�Y
+++++++++++++++++++++++++++++++++++++++++
+HTTP/1.1 404 Not Found
+set-cookie: _csrf=s%3AxSm7NYk_dfkQuncqzQuiKRby.nAZqPdX5iVev4l5coU%2BY4wpYfyosxf80BFxzCETSimU; Path=/
+set-cookie: _csrfToken=oPu36Jlv-9PFWw7PZSSL2ndCAogozIveG7Qo; Path=/
+set-cookie: connect.sid=s%3AH-HprcGX1H1BU8-wWYGRpqDGXMnIY7E4.rLm%2FzKvAHz9jb3AM0z9vIKhjmx5bGhHZ5jSbfcKMNmA; Path=/; HttpOnly
+Content-Type: text/html; charset=utf-8
+Content-Length: 1582
+ETag: W/"Kr+MkxG6s835cdNZ9p0vNg=="
+Vary: Accept-Encoding
+Date: Sat, 18 Apr 2015 22:50:30 GMT
+Connection: keep-alive
+
+<!DOCTYPE html><html><head><title>Page Not Found</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="/layouts/core.min.css?br34k-01"></head><body><div class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><a href="/" class="navbar-brand"><img src="/media/logo-symbol-64x64.png" class="navbar-logo"><span class="navbar-brand-label">Drywall</span></a><button data-toggle="collapse" data-target=".my-navbar-collapse" class="navbar-toggle collapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div><div class="navbar-collapse my-navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/signup/">Sign Up</a></li><li><a href="/contact/">Contact</a></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="/login/"><i class="fa fa-user"></i> Sign In</a></li></ul></div></div></div><div class="page"><div class="container"><h1>Page Not Found</h1><p class="lead">The resource you requested doesn't exist.</p></div></div><div class="footer"><div class="container"><span class="copyright pull-right">&#169; 2015 Acme, Inc.</span><ul class="links"><li><a href="/">Home</a></li><li><a href="/contact/">Contact</a></li></ul><div class="clearfix"></div></div></div><div class="ajax-spinner"><img src="/media/ajax-pulse.gif"></div><!--if lte IE 9script(src='/layouts/ie-sucks.min.js?br34k-01')--><script src="/layouts/core.min.js?br34k-01"></script></body></html
+--------------------------------------------------------------------------------
+
