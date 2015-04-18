@@ -1239,6 +1239,24 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Proxy-Authorization
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.34
+		 */
+		proxy_authorization: {
+			$and: [
+				{
+					literal: 'Proxy-Authorization'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'credentials'
+				}
+			]
+		},
+
+		/**
 		 * name: general-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-4.5
 		 */
