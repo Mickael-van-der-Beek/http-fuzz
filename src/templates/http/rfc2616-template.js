@@ -2337,6 +2337,25 @@ module.exports = (function () {
 		},
 
 		/**
+		 * name: Content-Length
+		 * ref: https://tools.ietf.org/html/rfc2616#section-14.13
+		 */
+		content_length: {
+			$and: [
+				{
+					literal: 'Content-Length'
+				},
+				{
+					literal: ':'
+				},
+				{
+					token: 'DIGIT',
+					quantifier: '1*'
+				}
+			]
+		},
+
+		/**
 		 * name: extension-header
 		 * ref: https://tools.ietf.org/html/rfc2616#section-7.1
 		 */
