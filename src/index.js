@@ -17,7 +17,11 @@ module.exports = (function () {
 	// 	return 'LOOOOOOOOOOL';
 	// });
 
-	// Client.send('GET / HTTP/1.1\r\n\r\n', function () {
+	// Client.send([
+	// 	'GET ):6 HTTP/9.6',
+	// 	'\r\n\r\n',
+	// 	'a�'
+	// ].join(''), function () {
 	// 	console.log(arguments);
 	// });
 
