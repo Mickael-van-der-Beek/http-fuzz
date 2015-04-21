@@ -1,0 +1,86 @@
+module.exports = [
+	// JavaScripts "space" characters (\s)
+	'\u0009',
+	'\u000a',
+	'\u000b',
+	'\u000c',
+	'\u000d',
+	'\u0020',
+	'\u00a0',
+	'\u1680',
+	'\u180e',
+	'\u2000',
+	'\u2001',
+	'\u2002',
+	'\u2003',
+	'\u2004',
+	'\u2005',
+	'\u2006',
+	'\u2007',
+	'\u2008',
+	'\u2009',
+	'\u200a',
+	'\u2028',
+	'\u2029',
+	'\u202f',
+	'\u205f',
+	'\u3000',
+	'\ufeff',
+
+	// HTML attribute delimiters
+
+	// HTTP request splitting sequences
+
+	// Null byte unescaped
+	'\u0000',
+
+	// Null byte escaped
+	'\\u0000',
+	'\\x00',
+	'\\0',
+
+	// SQL special characters
+
+
+	'',
+	'`',
+	'´',
+	'_',
+	'.',
+	'-',
+	'+',
+	'˙',
+	'"',
+	'<',
+	'>',
+	';',
+	'&',
+	'@',
+	'/',
+	'--',
+	'\\',
+	'//',
+	'\n',
+	'\r',
+	'\'',
+	'://',
+	'\n\r',
+	'%00',
+	'\\x00',
+	'\u0000',
+	'\\0',
+	'null',
+	'undefined',
+	new Buffer(0x32).toString('utf8'),
+	String.fromCharCode(0),
+	String.fromCharCode(1),
+	String.fromCharCode(Math.pow(2, 8)),
+	String.fromCharCode(Math.pow(2, 8) + 1),
+	String.fromCharCode(Math.pow(2, 8) - 1),
+	String.fromCharCode(Math.pow(2, 16)),
+	String.fromCharCode(Math.pow(2, 16) + 1),
+	String.fromCharCode(Math.pow(2, 16) - 1),
+	String.fromCharCode(Math.pow(2, 32)),
+	String.fromCharCode(Math.pow(2, 32) + 1),
+	String.fromCharCode(Math.pow(2, 32) - 1)
+];

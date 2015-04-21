@@ -56,9 +56,9 @@ module.exports = (function () {
 					error.type = 'NO_ERROR';
 				}
 
-				socket.destroy();
-
 				chunks = Array.isArray(chunks) ? chunks : chunks.join('');
+
+				socket.destroy();
 
 				callback(error, chunks);
 			});
