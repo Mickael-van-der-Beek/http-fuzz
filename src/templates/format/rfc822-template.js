@@ -56,9 +56,13 @@ module.exports = (function () {
 		},
 
 		/**
-		 * name: HTAB
+		 * name: HT
+		 * aliases: HTAB
 		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
 		 */
+		HTAB: {
+			token: 'HT'
+		},
 		HT: {
 			literal: '\t'
 		},
@@ -108,10 +112,14 @@ module.exports = (function () {
 		},
 
 		/**
-		 * name: hex
+		 * name: HEXDIG
+		 * aliases: HEX
 		 * ref: https://tools.ietf.org/html/rfc3986#appendix-D.2
 		 */
-		hex: {
+		HEX: {
+			token: 'HEXDIG'
+		},
+		HEXDIG: {
 			$or: []
 				.concat(
 					Array.apply(

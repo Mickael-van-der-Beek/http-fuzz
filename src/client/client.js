@@ -58,6 +58,8 @@ module.exports = (function () {
 
 				socket.destroy();
 
+				chunks = Array.isArray(chunks) ? chunks : chunks.join('');
+
 				callback(error, chunks);
 			});
 
