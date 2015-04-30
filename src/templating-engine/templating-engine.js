@@ -48,7 +48,7 @@ module.exports = (function () {
 		var literals = [];
 		var literal = null;
 
-		for (var i = 0; i < iterations; i++) {			
+		for (var i = 0; i < iterations; i++) {
 			if ('literal' in mainToken) {
 				literal = mainToken.literal;
 			}

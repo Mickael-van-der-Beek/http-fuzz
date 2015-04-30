@@ -60,9 +60,9 @@ module.exports = (function () {
 		 * aliases: HTAB
 		 * ref: https://tools.ietf.org/html/rfc822#section-3.3
 		 */
-		HTAB: {
-			token: 'HT'
-		},
+		// HTAB: {
+		// 	token: 'HT'
+		// },
 		HT: {
 			literal: '\t'
 		},
@@ -116,9 +116,9 @@ module.exports = (function () {
 		 * aliases: HEX
 		 * ref: https://tools.ietf.org/html/rfc3986#appendix-D.2
 		 */
-		HEX: {
-			token: 'HEXDIG'
-		},
+		// HEX: {
+		// 	token: 'HEXDIG'
+		// },
 		HEXDIG: {
 			$or: []
 				.concat(
@@ -190,6 +190,11 @@ module.exports = (function () {
 						'/',
 						'='
 					]
+					.map(function (item, index) {
+						return {
+							literal: item
+						};
+					})
 				)
 		},
 

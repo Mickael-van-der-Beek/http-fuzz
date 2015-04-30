@@ -1,5 +1,5 @@
 var TemplatingEngine = require('./templating-engine/templating-engine');
-var ErrorReporter = request('./error-reporter/error-reporter');
+var ErrorReporter = require('./error-reporter/error-reporter');
 
 var ClientConfig = require('./config/client');
 var Client = require('./client/client');
@@ -13,6 +13,16 @@ module.exports = (function () {
 	ErrorReporter.init();
 
 	Client.init(ClientConfig);
+
+	// Client.send([
+	// 	'TRACE / HTTP/1.1',
+	// 	'Host: httpbin.org',
+	// 	'Max-Forwards: 1',
+	// 	'\r\n'
+	// ].join('\r\n'), function (e, response) {
+	// 	console.log('> Error', e);
+	// 	console.log('> Response', arguments);
+	// });
 
 	var fuzz = function () {
 		var request = TemplatingEngine.render(RFC2616HttpTemplate, 'request');
@@ -48,20 +58,20 @@ module.exports = (function () {
 		});
 	};
 
-	process.on('SIGINT', function() {
-		console.log(ErrorReporter.responseCache);
-		console.log(ErrorReporter.errorCache);
-		process.exit();
-	});
+	// process.on('SIGINT', function() {
+	// 	console.log(ErrorReporter.responseCache);
+	// 	console.log(ErrorReporter.errorCache);
+	// 	process.exit();
+	// });
 
-	process.on('uncaughtException', function (e) {
-		console.error(e);
-		console.error(e.stack);
-		console.log('\n\n');
-		console.log(ErrorReporter.responseCache);
-		console.log(ErrorReporter.errorCache);
-		process.exit();
-	});
+	// process.on('uncaughtException', function (e) {
+	// 	console.error(e);
+	// 	console.error(e.stack);
+	// 	console.log('\n\n');
+	// 	console.log(ErrorReporter.responseCache);
+	// 	console.log(ErrorReporter.errorCache);
+	// 	process.exit();
+	// });
 
-	fuzz();
+	// fuzz();
 })();

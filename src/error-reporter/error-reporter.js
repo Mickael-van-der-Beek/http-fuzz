@@ -16,6 +16,7 @@ module.exports = (function () {
 			.update(
 				error
 					// Offset by 7 due to the auto-prepended "Error :"
+					.stack
 					.substr(7 + new Error('Test: testy').message.length),
 				'utf8'
 			)

@@ -1293,7 +1293,6 @@ module.exports = (function () {
 							token: 'absolute_uri'
 						},
 						{
-							// TODO: Implement this token
 							token: 'relative_uri'
 						}
 					]
@@ -2195,34 +2194,34 @@ module.exports = (function () {
 		entity_header: {
 			$or: [
 				{
-					literal: 'Allow'
+					token: 'allow'
 				},
 				{
-					literal: 'Content-Encoding'
+					token: 'content_encoding'
 				},
 				{
-					literal: 'Content-Language'
+					token: 'content_language'
 				},
 				{
-					literal: 'Content-Length'
+					token: 'content_length'
 				},
 				{
-					literal: 'Content-Location'
+					token: 'content_location'
 				},
 				{
-					literal: 'Content-MD5'
+					token: 'content_md5'
 				},
 				{
-					literal: 'Content-Range'
+					token: 'content_range'
 				},
 				{
-					literal: 'Content-Type'
+					token: 'content_type'
 				},
 				{
-					literal: 'Expires'
+					token: 'expires'
 				},
 				{
-					literal: 'Last-Modified'
+					token: 'last_modified'
 				},
 				{
 					token: 'extension_header'
@@ -2504,6 +2503,35 @@ module.exports = (function () {
 				},
 				{
 					token: 'media_type'
+				}
+			]
+		},
+
+		/**
+		 * name: Content-Type
+		 * ref: https://tools.ietf.org/html/rfc2616#section-3.7
+		 */
+		media_type: {
+			$and: [
+				{
+					token: 'type'
+				},
+				{
+					literal: '/'
+				},
+				{
+					token: 'subtype'
+				},
+				{
+					$and: [
+						{
+							literal: ';'
+						},
+						{
+							token: 'parameter'
+						}
+					],
+					quantifier: '*'
 				}
 			]
 		},

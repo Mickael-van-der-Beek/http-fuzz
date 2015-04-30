@@ -1,6 +1,6 @@
 {
 	"timeout": 5000,
 
-	"host": "localhost",
-	"port": 3000
+	"host": "httpbin.org",
+	"port": 80
 }
